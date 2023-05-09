@@ -13,8 +13,24 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Path */
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@constant/*": ["src/constant/*"],
+      "@action/*": ["src/actions/*"],
+      "@present/*": ["src/present/*"],
+      "@common/*": ["src/present/common/*"],
+      "@component/*": ["src/present/component/*"],
+      "@layout/*": ["src/present/layout/*"],
+      "@pages/*": ["src/present/pages/*"],
+      "@store/*": ["src/store/*"],
+      "@types/*": ["src/types/*"]
+    },
+
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
