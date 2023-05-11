@@ -28,7 +28,7 @@ npm run dev
 - [ ] Header
 - [ ] HeaderCompo
 - [ ] Modal
-- [ ] Navbar
+- [X] Navbar
 - [ ] Article
 - [ ] ArticleLayout
 - [X] Button
