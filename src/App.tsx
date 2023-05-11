@@ -1,19 +1,23 @@
-import { useState } from 'react'
-import { Route } from 'react-router'
-import { Routes } from 'react-router-dom'
-import './App.css'
-import Navbar from './present/common/Navbar'
+import { useState } from "react";
+import { Route, Routes,BrowserRouter } from "react-router-dom";
+import "./App.css";
+import Navbar from "./present/common/Navbar";
+import Home from "./present/pages/Home/Home";
+import Scrapscreen from "./present/pages/Scrapscreen/Scrapscreen";
 
 function App() {
   return (
-    <div id="app">
-      <Routes>
-        {/* <Route path={"/home"} element={< />}></Route>
-        <Route path={"/scrap"} element={< />}></Route> */}
-      </Routes>
-      <Navbar />
-    </div>
-  )
+    <BrowserRouter>
+      <div id="app">
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/home"} element={<Home />} />
+          <Route path={"/scrapscreen"} element={<Scrapscreen />} />
+        </Routes>
+        <Navbar />
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
