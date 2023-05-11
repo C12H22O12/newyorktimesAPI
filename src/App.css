@@ -24,11 +24,11 @@ body {
 }
 
 #root {
-  width: 450px;
+  width: 375px;
   height: 100vh;
   background-color: var(--body-color);
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 375px) {
     width:100%;
   }
 }
