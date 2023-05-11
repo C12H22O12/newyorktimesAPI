@@ -25,8 +25,8 @@ npm run dev
 
 ## Task
 ### Common
-- [ ] Header
-- [ ] HeaderCompo
+- [X] Header
+- [X] HeaderCompo
 - [ ] Modal
 - [X] Navbar
 - [ ] Article
