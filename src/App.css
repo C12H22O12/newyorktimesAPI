@@ -33,6 +33,7 @@ body {
   width: 375px;
   height: 100vh;
   background-color: var(--body-color);
+  position: relative;
 
   @media screen and (max-width: 375px) {
     width:100%;

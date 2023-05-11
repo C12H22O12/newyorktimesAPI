@@ -1,11 +1,17 @@
 import { useState } from 'react'
+import { Route } from 'react-router'
+import { Routes } from 'react-router-dom'
 import './App.css'
-import Button from './present/common/Button'
+import Navbar from './present/common/Navbar'
 
 function App() {
   return (
     <div id="app">
-      <Button content='필터 적용하기' />
+      <Routes>
+        {/* <Route path={"/home"} element={< />}></Route>
+        <Route path={"/scrap"} element={< />}></Route> */}
+      </Routes>
+      <Navbar />
     </div>
   )
 }

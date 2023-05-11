@@ -31,7 +31,7 @@ npm run dev
 - [ ] Navbar
 - [ ] Article
 - [ ] ArticleLayout
-- [ ] Button
+- [X] Button
 - [ ] NationCompo
 - [ ] Toast
 - [ ] Filter
