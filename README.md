@@ -28,10 +28,10 @@ npm run dev
 - [ ] Header
 - [ ] HeaderCompo
 - [ ] Modal
-- [ ] Navbar
+- [X] Navbar
 - [ ] Article
 - [ ] ArticleLayout
-- [ ] Button
+- [X] Button
 - [ ] NationCompo
 - [ ] Toast
 - [ ] Filter

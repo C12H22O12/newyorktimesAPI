@@ -1,7 +1,13 @@
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  src: url('./assets/font/AppleSDGothicNeoL.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'AppleSDGothicNeo';
 }
 
 :root {
@@ -24,11 +30,12 @@ body {
 }
 
 #root {
-  width: 450px;
+  width: 375px;
   height: 100vh;
   background-color: var(--body-color);
+  position: relative;
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 375px) {
     width:100%;
   }
 }

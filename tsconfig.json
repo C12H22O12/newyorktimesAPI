@@ -32,8 +32,9 @@
     "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports":true
   },
-  "include": ["src"],
+  "include": ["src","custom.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
