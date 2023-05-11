@@ -1,7 +1,13 @@
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  src: url('./assets/font/AppleSDGothicNeoL.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'AppleSDGothicNeo';
 }
 
 :root {
