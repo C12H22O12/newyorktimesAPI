@@ -3,8 +3,8 @@ import "./Navbar.css";
 
 import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as Home } from "../../../assets/icon/home_icon.svg";
-import { ReactComponent as Scrap } from "../../../assets/icon/scrap_icon.svg";
+import { ReactComponent as Home } from "@assets/icon/home_icon.svg";
+import { ReactComponent as Scrap } from "@assets/icon/scrap_icon.svg";
 
 function Navbar() {
   const navigate = useNavigate();
