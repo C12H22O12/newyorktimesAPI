@@ -39,7 +39,8 @@ npm run dev
 <br />
 
 ### HomeScreen
-- [ ] Article Search api
+- [X] Article Search api
+- [ ] Infinite Scroll
 
 <br />
 

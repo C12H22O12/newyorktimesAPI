@@ -1,10 +1,11 @@
-import { useState } from "react";
 import { Route, Routes,BrowserRouter } from "react-router-dom";
+
 import "./App.css";
-import Header from "./present/common/Header/Header";
-import Navbar from "./present/common/Navbar/Navbar";
-import Home from "./present/pages/Home/Home";
-import Scrapscreen from "./present/pages/Scrapscreen/Scrapscreen";
+
+import Header from "@present/common/Header/Header";
+import Navbar from "@present/common/Navbar/Navbar";
+import Home from "@present/pages/Home/Home";
+import Scrapscreen from "@present/pages/Scrapscreen/Scrapscreen";
 
 function App() {
   return (
