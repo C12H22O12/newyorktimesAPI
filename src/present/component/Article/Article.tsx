@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import "./Article.css";
+import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
 import StarBlank from "@assets/icon/star_blank.png"

@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import "./Navbar.css";
+import "./Navbar.style.css";
 
 import { useNavigate } from "react-router-dom";
 

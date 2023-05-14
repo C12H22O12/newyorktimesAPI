@@ -1,5 +1,5 @@
 import { memo } from "react"
-import './Button.css'
+import './Button.style.css'
 
 type ButtonProps = {
     content: string;

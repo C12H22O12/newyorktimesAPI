@@ -40,8 +40,9 @@ npm run dev
 
 ### HomeScreen
 - [X] Article Search api
-- [ ] Infinite Scroll
-- [ ] Loading
+- [X] Infinite Scroll
+- [X] Loading
+- [ ] Apply Loading
 
 <br />
 
@@ -53,3 +54,9 @@ npm run dev
 
 ### ScrapScreen
 - [ ] ScrapScreen_NoData
+
+<br />
+
+### Error Handling
+- [X] 401
+- [ ] 429
