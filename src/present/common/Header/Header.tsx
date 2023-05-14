@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import "./Header.css";
 
-import { ReactComponent as Search } from "../../../assets/icon/search_icon.svg";
-import { ReactComponent as Calendar } from "../../../assets/icon/calendar_icon.svg";
+import { ReactComponent as Search } from "@assets/icon/search_icon.svg";
+import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 
 function Header() {
   const content = [

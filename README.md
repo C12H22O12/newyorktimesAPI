@@ -29,8 +29,8 @@ npm run dev
 - [X] HeaderCompo
 - [ ] Modal
 - [X] Navbar
-- [ ] Article
-- [ ] ArticleLayout
+- [X] Article
+- [X] ArticleLayout
 - [X] Button
 - [ ] NationCompo
 - [ ] Toast
@@ -39,7 +39,9 @@ npm run dev
 <br />
 
 ### HomeScreen
-- [ ] Article Search api
+- [X] Article Search api
+- [ ] Infinite Scroll
+- [ ] Loading
 
 <br />
 
