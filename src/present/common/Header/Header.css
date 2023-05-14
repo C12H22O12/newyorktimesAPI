@@ -1,12 +1,16 @@
 .Header {
   padding: 13px 20px;
-  width: 100%;
+  width: 375px;
   border-bottom: solid 1px var(--input-color);
 
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+
+  position: fixed;
+  z-index: 50;
+  background-color: var(--body-color);
 }
 
 .HeaderCompo {
