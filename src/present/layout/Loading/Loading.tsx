@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import './Loading.style.css'
 
+// svg file : https://codepen.io/aurer/pen/ZEJxpO?editors=1100
 function Loading() {
   return (
     <div className="Container">
