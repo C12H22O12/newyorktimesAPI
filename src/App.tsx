@@ -1,4 +1,4 @@
-import { Route, Routes,BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 import "./App.css";
 
@@ -19,6 +19,7 @@ function App() {
         </Routes>
         <Navbar />
       </div>
+      <div id="modalRoot"></div>
     </BrowserRouter>
   );
 }
