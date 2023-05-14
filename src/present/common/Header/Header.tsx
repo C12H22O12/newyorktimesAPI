@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import "./Header.css";
+import "./Header.style.css";
 
 import { ReactComponent as Search } from "@assets/icon/search_icon.svg";
 import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
