@@ -3,6 +3,11 @@
   src: url('./assets/font/AppleSDGothicNeoL.ttf');
 }
 
+@font-face {
+  font-family: 'AppleSDGothicNeoB';
+  src: url('./assets/font/AppleSDGothicNeoB.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;

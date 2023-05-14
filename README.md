@@ -27,14 +27,20 @@ npm run dev
 ### Common
 - [X] Header
 - [X] HeaderCompo
-- [ ] Modal
 - [X] Navbar
 - [X] Article
 - [X] ArticleLayout
 - [X] Button
-- [ ] NationCompo
 - [ ] Toast
 - [ ] Filter
+
+<br />
+
+### Filter
+- [X] Modal
+- [X] NationCompo
+- [ ] HeadlineInput
+- [ ] Datepicker
 
 <br />
 
