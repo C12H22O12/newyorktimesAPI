@@ -39,8 +39,8 @@ npm run dev
 - [ ] Filter
 - [X] Modal
 - [X] NationCompo
-- [ ] HeadlineInput
-- [ ] Datepicker
+- [X] HeadlineInput
+- [X] Datepicker
 
 <br />
 
