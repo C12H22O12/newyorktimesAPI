@@ -45,6 +45,14 @@ function FilterModal({ onClose }: any) {
     return <NationCompo key={idx} nation={elem} />;
   });
 
+  // datepicker
+  const datepickerPlaceholder = (
+    <div id="datepickerLabel">
+      <div className="isInit">{inputDate}</div>
+      <Calendar />
+    </div>
+  );
+
   return (
     <div>
       <div id="background" onClick={onClose} />
@@ -63,12 +71,7 @@ function FilterModal({ onClose }: any) {
             locale={ko}
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            customInput={
-              <div id="datepickerLabel">
-                <div className="isInit">{inputDate}</div>
-                <Calendar />
-              </div>
-            }
+            customInput={datepickerPlaceholder}
           />
         </div>
         <div className="modalCompo">
