@@ -11,6 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <div id="app">
+        <div id="toastRoot"></div>
         <Header />
         <Routes>
           <Route path={"/"} element={<Home />} />

@@ -31,7 +31,7 @@ npm run dev
 - [X] Article
 - [X] ArticleLayout
 - [X] Button
-- [ ] Toast
+- [X] Toast
 
 <br />
 
@@ -66,4 +66,4 @@ npm run dev
 
 ### Error Handling
 - [X] 401
-- [ ] 429
+- [X] 429

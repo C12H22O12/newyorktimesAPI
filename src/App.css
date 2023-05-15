@@ -1,31 +1,32 @@
 @font-face {
-  font-family: 'AppleSDGothicNeo';
-  src: url('./assets/font/AppleSDGothicNeoL.ttf');
+  font-family: "AppleSDGothicNeo";
+  src: url("./assets/font/AppleSDGothicNeoL.ttf");
 }
 
 @font-face {
-  font-family: 'AppleSDGothicNeoB';
-  src: url('./assets/font/AppleSDGothicNeoB.ttf');
+  font-family: "AppleSDGothicNeoB";
+  src: url("./assets/font/AppleSDGothicNeoB.ttf");
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'AppleSDGothicNeo';
+  font-family: "AppleSDGothicNeo";
 }
 
 :root {
   /* ===== Colors ===== */
-  --body-color: #FFFFFF;
-  --background-color: #F0F1F4;
+  --body-color: #ffffff;
+  --background-color: #f0f1f4;
   --text-color: #000000;
-  --subtext-color: #6D6D6D;
-  --primary-color: #3478F6;
-  --subprimary-color: #82B0F4;
-  --star-color: #FFB800;
-  --compo-color: #F2F2F2;
-  --input-color: #C4C4C4;
+  --subtext-color: #6d6d6d;
+  --primary-color: #3478f6;
+  --subprimary-color: #82b0f4;
+  --star-color: #ffb800;
+  --compo-color: #f2f2f2;
+  --input-color: #c4c4c4;
+  --wrong-color: #ff0000;
 }
 
 body {
@@ -41,7 +42,7 @@ body {
   position: relative;
 
   @media screen and (max-width: 375px) {
-    width:100%;
+    width: 100%;
   }
 }
 
