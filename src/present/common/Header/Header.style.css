@@ -17,6 +17,7 @@
   padding: 6px 12px 4px;
   border-radius: 30px;
   border: solid 1px var(--input-color);
+  width: fit-content;
 
   display: flex;
   justify-content: center;
@@ -24,6 +25,8 @@
   gap: 4px;
 
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .HeaderCompo div {
@@ -31,4 +34,21 @@
   font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.04em;
+}
+
+.HeaderCompo:nth-child(1) div {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checked {
+  border: solid 1px var(--primary-color);
+  color: var(--primary-color);
+}
+
+.checked svg,
+.checked path {
+  fill: var(--primary-color);
 }

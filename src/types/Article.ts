@@ -64,21 +64,26 @@ type Byline = {
 */
 export type ArticleType = {
   abstract?: string;
-  web_url: string;                  // url
+  web_url: string; // url
   snippet?: string;
   lead_paragraph?: string;
-  source: string;                   // newspaper
+  source: string; // newspaper
   multimedia?: Array<Multimedia>;
-  headline: Headline;               // Headline
+  headline: Headline; // Headline
   keywords?: Array<Keyword>;
-  pub_date: string;                 // public data
+  pub_date: string; // public data
   document_type?: string;
   news_desk?: string;
-  section_name: string;             // Nations
+  section_name: string; // Nations
   subsection_name?: string;
-  byline: Byline;                   // editor
+  byline: Byline; // editor
   type_of_material?: string;
   _id?: string;
   word_count?: number;
-  uri: string;                      // uri
+  uri: string; // uri
+};
+
+export type useDataTypes = {
+  moreData: boolean;
+  target: React.MutableRefObject<any>;
 };

@@ -1,5 +1,6 @@
 .ArticleLayout {
   width: 100%;
+  min-height: calc(100% - 85px);
   padding-block: 19px calc(19px + 85px);
   overflow: auto;
 
@@ -29,10 +30,12 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 8px;
 }
 
 .Article .__headline div {
   font-weight: 600;
+  font-family: 'AppleSDGothicNeoB';
   font-size: 18px;
   line-height: 28px;
 

@@ -1,44 +1,68 @@
 import React, { memo, useEffect, useState } from "react";
-import { getAsync } from "@src/actions/modules/axios";
 
-import Article from "@src/present/component/Article/Article";
+import Article from "@component/Article/Article";
+import Loading from "@layout/Loading/Loading";
+import ToastContainer from "@layout/ToastContainer/ToastContainer";
+
+import NoData from "@layout/NoData/NoData";
 import { ArticleType } from "@src/types/Article";
-import Loading from "@src/present/layout/Loading/Loading";
-import useInfinite from "@src/actions/hooks/useInfinite";
-import { url } from "@src/constant/variable";
+import { ToastType } from "@src/types/Toast";
 
-function Home() {
-  const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
-  const [page, setPage] = useState<number>(1);
-  const [moreData, setMoreDate] = useState<boolean>(true);
+type HomeProps = {
+  articleList: Array<ArticleType>;
+  toastOn: ToastType;
+  toastCloseHandler: any;
+  moreData: boolean;
+  target: React.MutableRefObject<any>;
+};
 
-  const getData = async () => {
-    await getAsync(`&page=${page}`).then((res) => {
-      if (res.isSuccess) {
-        setArticleList((prev) => prev.concat(...res.result.docs));
-        setPage((prev) => {
-          const next = prev + 1;
-
-          return (next >= 5) ? 1 : next;
-        });
-        console.log(res.result);
-      } else {
-        setMoreDate(false);
-      }
-    });
-  };
-
-  const target = useInfinite(async (entry, observer) => {
-    await getData();
-  });
-
+function Home({
+  articleList,
+  toastOn,
+  toastCloseHandler,
+  moreData,
+  target,
+}: HomeProps) {
+  // create Article Component by articleList
   const articles = articleList.map((elem, idx) => {
     return <Article key={idx} item={elem} />;
   });
 
+  // reloadHandler for Error
+  const reloadHandler = () => {
+    location.reload();
+  };
+
+  const noDataText = (
+    <div>
+      오류가 발생했습니다.
+      <br />
+      잠시 후 새로고침 해주세요
+    </div>
+  );
+
   return (
     <div className="ArticleLayout">
-      {articles} {moreData ? <div ref={target} /> : null}
+      {articleList.length === 0 ? <Loading /> : null}
+
+      {/* Toast 생성 */}
+      {toastOn.isToast && (
+        <ToastContainer aboutToast={toastOn} closeHandler={toastCloseHandler} />
+      )}
+
+      {/* Error 발생 시 NoData layout 보여주기 */}
+      {articleList.length !== 0 && toastOn.type === "error" ? (
+        <NoData
+          type={"noData"}
+          content={noDataText}
+          buttonContent={"새로고침 하기"}
+          handler={reloadHandler}
+        />
+      ) : (
+        <>
+          {articles} {moreData ? <div ref={target} /> : null}
+        </>
+      )}
     </div>
   );
 }

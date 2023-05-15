@@ -27,14 +27,21 @@ npm run dev
 ### Common
 - [X] Header
 - [X] HeaderCompo
-- [ ] Modal
 - [X] Navbar
 - [X] Article
 - [X] ArticleLayout
 - [X] Button
-- [ ] NationCompo
-- [ ] Toast
-- [ ] Filter
+- [X] Toast
+
+<br />
+
+### Filter
+- [X] Filter
+- [X] Modal
+- [X] NationCompo
+- [X] HeadlineInput
+- [X] Datepicker
+- [X] Filter_NoData
 
 <br />
 
@@ -42,21 +49,18 @@ npm run dev
 - [X] Article Search api
 - [X] Infinite Scroll
 - [X] Loading
-- [ ] Apply Loading
+- [X] Apply Loading
 
 <br />
 
 ### ScrapScreen
-- [ ] Move to NoScrap
+- [X] Move to NoScrap
 - [ ] Scrap
-
-<br />
-
-### ScrapScreen
-- [ ] ScrapScreen_NoData
 
 <br />
 
 ### Error Handling
 - [X] 401
-- [ ] 429
+- [X] 429
+- [X] NoData
+- [ ] No Change in useData url
