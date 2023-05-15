@@ -26,6 +26,7 @@
   align-items: center;
 
   position: absolute;
+  z-index: 150;
   top: calc(50% - (480px / 2));
   left: calc(50% - (335px / 2));
 }
@@ -75,19 +76,6 @@
   justify-content: space-between;
   cursor: pointer;
 }
-
-/* #datepicker[type="date"]::-webkit-calendar-picker-indicator {
-  background: transparent;
-  bottom: 0;
-  color: transparent;
-  cursor: pointer;
-  height: auto;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: auto;
-} */
 
 .isInit,
 #headLine::placeholder {

@@ -19,9 +19,11 @@ function Article({ item }: ArticleProps) {
     weekDayArr[weekDayIdx]
   })`;
 
+  console.log(item.byline.person[0]);
+
   // moveHandler
   const moveHandler = () => {
-    window.location.href = item.web_url
+    window.location.href = item.web_url;
   };
 
   return (
@@ -32,7 +34,9 @@ function Article({ item }: ArticleProps) {
       </div>
       <div className="__footer">
         <div>
-          {item.source} &nbsp; {item.subsection_name}
+          {item.source} &nbsp;{" "}
+          {item.byline.person[0] !== undefined &&
+            item.byline.person[0].lastname}
         </div>
         <div>{printDate}</div>
       </div>

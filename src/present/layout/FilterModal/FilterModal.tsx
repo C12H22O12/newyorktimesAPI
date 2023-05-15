@@ -19,13 +19,13 @@ function FilterModal({ onClose }: any) {
     headLine: "",
     date: "",
     country: "",
-  })
+  });
   const [startDate, setStartDate] = useState(new Date());
   const [inputDate, setInputDate] = useState<string>("날짜를 선택해주세요");
 
   useEffect(() => {
     if (query.date !== "") {
-      setInputDate(format(startDate, "yyyy.MM.dd"))
+      setInputDate(format(startDate, "yyyy.MM.dd"));
     }
   }, [startDate]);
 
@@ -46,7 +46,8 @@ function FilterModal({ onClose }: any) {
   });
 
   return (
-    <div id="background">
+    <div>
+      <div id="background" onClick={onClose} />
       <div className="modalBody">
         <div className="modalCompo">
           <ModalHeader content="헤드라인" />
