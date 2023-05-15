@@ -84,7 +84,6 @@ export type ArticleType = {
 };
 
 export type useDataTypes = {
-  articleList: Array<ArticleType>;
   moreData: boolean;
   target: React.MutableRefObject<any>;
 };

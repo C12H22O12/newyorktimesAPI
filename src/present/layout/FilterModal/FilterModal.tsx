@@ -1,13 +1,14 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import "./FilterModal.style.css";
 
-import Button from "@src/present/common/Button/Button";
-import ModalHeader from "@src/present/component/ModalHeader/ModalHeader";
-import NationCompo from "@src/present/component/NationCompo/NationCompo";
+import Button from "@common/Button/Button";
+import ModalHeader from "@component/ModalHeader/ModalHeader";
+import NationCompo from "@component/NationCompo/NationCompo";
 
 import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 
-import { FilterType, NationCompoTypes } from "@src/types/Filter";
+import { FilterType } from "@src/types/Filter";
+import { nationList } from "@src/constant/lists";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 
@@ -15,48 +16,76 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 type FilterModalProps = {
-  onClose: any,
-  query : FilterType
-}
+  onClose: any;
+  queryHandler: any;
+};
 
-function FilterModal({ onClose, query }: FilterModalProps) {
-  const [startDate, setStartDate] = useState(new Date());
+function FilterModal({ onClose, queryHandler }: FilterModalProps) {
+  const [targetDate, setTargetDate] = useState(new Date());
   const [inputDate, setInputDate] = useState<string>("날짜를 선택해주세요");
+  const [modalQuery, setModalQuery] = useState<FilterType>({
+    headLine: "",
+    date: "",
+    country: [],
+  });
 
   useEffect(() => {
-    if (query.date !== "") {
-      setInputDate(format(startDate, "yyyy.MM.dd"));
+    console.log(targetDate, inputDate);
+    if (modalQuery.date === "") {
+      setModalQuery((prev) => {
+        return { ...prev, date: format(targetDate, "yyyyMMdd") };
+      });
+    } else {
+      setInputDate(format(targetDate, "yyyy.MM.dd"));
     }
-  }, [startDate]);
-
-  // nation
-  const nationList: Array<NationCompoTypes> = [
-    { country: "대한민국", value: "" },
-    { country: "중국", value: "" },
-    { country: "일본", value: "" },
-    { country: "미국", value: "" },
-    { country: "북한", value: "" },
-    { country: "러시아", value: "" },
-    { country: "프랑스", value: "" },
-    { country: "영국", value: "" },
-  ];
-
-  const mappingNation = nationList.map((elem, idx) => {
-    return <NationCompo key={idx} nation={elem} />;
-  });
+  }, [targetDate]);
 
   // datepicker
   const datepickerPlaceholder = (
     <div id="datepickerLabel">
-      <div className="isInit">{inputDate}</div>
+      <div
+        className={`${
+          inputDate !== "날짜를 선택해주세요" ? "queryChecked" : "isInit"
+        }`}
+      >
+        {inputDate}
+      </div>
       <Calendar />
     </div>
   );
 
   // Apply Filter
   const filterhandler = () => {
-    onClose()
-  }
+    queryHandler(modalQuery);
+    onClose();
+  };
+
+  // Headline handler
+  const headlineHandler = (e) => {
+    setModalQuery((prev) => {
+      return { ...prev, headLine: e.target.value };
+    });
+  };
+
+  // Nation handler
+  const nationHandler = useCallback(
+    (checked: boolean, item: string) => {
+      if (checked) {
+        setModalQuery((prev) => {
+          return { ...prev, country: [...prev.country, item] };
+        });
+      } else {
+        setModalQuery((prev) => {
+          return { ...prev, country: prev.country.filter((el) => el !== item) };
+        });
+      }
+    },
+    [modalQuery.country]
+  );
+
+  const mappingNation = nationList.map((elem, idx) => {
+    return <NationCompo key={idx} nation={elem} handler={nationHandler} />;
+  });
 
   return (
     <div>
@@ -69,6 +98,7 @@ function FilterModal({ onClose, query }: FilterModalProps) {
             id="headLine"
             type="text"
             placeholder="검색하실 헤드라인을 입력해주세요."
+            onChange={headlineHandler}
           />
         </div>
 
@@ -77,8 +107,8 @@ function FilterModal({ onClose, query }: FilterModalProps) {
           <ModalHeader content="날짜" />
           <DatePicker
             locale={ko}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            selected={targetDate}
+            onChange={(date) => setTargetDate(date)}
             customInput={datepickerPlaceholder}
           />
         </div>
@@ -90,7 +120,7 @@ function FilterModal({ onClose, query }: FilterModalProps) {
         </div>
 
         {/* Submit */}
-        <Button content="필터 적용하기" handler={filterhandler}/>
+        <Button content="필터 적용하기" handler={filterhandler} />
       </div>
     </div>
   );

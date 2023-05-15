@@ -81,3 +81,7 @@
 #headLine::placeholder {
   color: var(--input-color);
 }
+
+.queryChecked {
+  color: var(--text-color);
+}

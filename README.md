@@ -36,7 +36,7 @@ npm run dev
 <br />
 
 ### Filter
-- [ ] Filter
+- [X] Filter
 - [X] Modal
 - [X] NationCompo
 - [X] HeadlineInput
@@ -63,3 +63,4 @@ npm run dev
 - [X] 401
 - [X] 429
 - [X] NoData
+- [ ] No Change in useData url
