@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { ArticleType } from "@src/types/Article";
 import { ToastType } from "@src/types/Toast";
 
@@ -11,18 +11,17 @@ type useDataProps = {
   setPage?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function useData({ url='', setToastOn, setPage }: useDataProps) {
+function useData({ url = "", setToastOn, setPage }: useDataProps) {
   const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
   const [moreData, setMoreDate] = useState<boolean>(true);
 
   // getDate
-  const getData = async () => {
+  const getData = useCallback(async () => {
     await getAsync(url).then((res) => {
       if (res.isSuccess) {
         setArticleList((prev) => prev.concat(...res.result.docs));
         setPage((prev) => {
           const next = prev + 1;
-
           return next >= 5 ? 1 : next;
         });
       } else {
@@ -35,7 +34,7 @@ function useData({ url='', setToastOn, setPage }: useDataProps) {
         });
       }
     });
-  };
+  }, [url]);
 
   // Infinite scroll => observer and get new data
   const target = useInfinite(async (entry, observer) => {

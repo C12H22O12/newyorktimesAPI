@@ -3,38 +3,32 @@ import React, { memo, useEffect, useState } from "react";
 import Article from "@component/Article/Article";
 import Loading from "@layout/Loading/Loading";
 import ToastContainer from "@layout/ToastContainer/ToastContainer";
-import { ToastType } from "@src/types/Toast";
+
 import NoData from "@layout/NoData/NoData";
-import useData from "@src/actions/hooks/useData";
+import { ArticleType } from "@src/types/Article";
+import { ToastType } from "@src/types/Toast";
 
-function Home() {
-  const [page, setPage] = useState<number>(1);
-  const [toastOn, setToastOn] = useState<ToastType>({
-    isToast: false,
-    type: "",
-    contentHeader: "",
-    contentBody: "",
-  });
+type HomeProps = {
+  articleList: Array<ArticleType>;
+  toastOn: ToastType;
+  toastCloseHandler: any;
+  moreData: boolean;
+  target: React.MutableRefObject<any>;
+};
 
-  const { articleList, moreData, target } = useData({
-    url: `&page=${page}`,
-    setToastOn: setToastOn,
-    setPage: setPage,
-  });
-
+function Home({
+  articleList,
+  toastOn,
+  toastCloseHandler,
+  moreData,
+  target,
+}: HomeProps) {
   // create Article Component by articleList
   const articles = articleList.map((elem, idx) => {
     return <Article key={idx} item={elem} />;
   });
 
-  // ToastHandler
-  const toastCloseHandler = () => {
-    setToastOn((prev) => {
-      return { ...prev, isToast: false };
-    });
-  };
-
-  // reloadHandler
+  // reloadHandler for Error
   const reloadHandler = () => {
     location.reload();
   };
