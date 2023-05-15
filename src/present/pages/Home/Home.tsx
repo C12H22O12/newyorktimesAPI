@@ -1,18 +1,14 @@
 import React, { memo, useEffect, useState } from "react";
-import { getAsync } from "@src/actions/modules/axios";
 
-import Article from "@src/present/component/Article/Article";
-import { ArticleType } from "@src/types/Article";
-import Loading from "@src/present/layout/Loading/Loading";
-import useInfinite from "@src/actions/hooks/useInfinite";
-import ToastContainer from "@src/present/layout/ToastContainer/ToastContainer";
+import Article from "@component/Article/Article";
+import Loading from "@layout/Loading/Loading";
+import ToastContainer from "@layout/ToastContainer/ToastContainer";
 import { ToastType } from "@src/types/Toast";
-import NoData from "@src/present/layout/NoData/NoData";
+import NoData from "@layout/NoData/NoData";
+import useData from "@src/actions/hooks/useData";
 
 function Home() {
-  const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
   const [page, setPage] = useState<number>(1);
-  const [moreData, setMoreDate] = useState<boolean>(true);
   const [toastOn, setToastOn] = useState<ToastType>({
     isToast: false,
     type: "",
@@ -20,31 +16,10 @@ function Home() {
     contentBody: "",
   });
 
-  // getDate
-  const getData = async () => {
-    await getAsync(`&page=${page}`).then((res) => {
-      if (res.isSuccess) {
-        setArticleList((prev) => prev.concat(...res.result.docs));
-        setPage((prev) => {
-          const next = prev + 1;
-
-          return next >= 5 ? 1 : next;
-        });
-      } else {
-        setMoreDate(false);
-        setToastOn({
-          isToast: true,
-          type: "error",
-          contentHeader: "Error",
-          contentBody: `데이터를 불러올 수 없습니다.`,
-        });
-      }
-    });
-  };
-
-  // Infinite scroll => observer and get new data
-  const target = useInfinite(async (entry, observer) => {
-    await getData();
+  const { articleList, moreData, target } = useData({
+    url: `&page=${page}`,
+    setToastOn: setToastOn,
+    setPage: setPage,
   });
 
   // create Article Component by articleList
