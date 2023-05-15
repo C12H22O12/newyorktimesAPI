@@ -49,7 +49,7 @@ npm run dev
 - [X] Article Search api
 - [X] Infinite Scroll
 - [X] Loading
-- [ ] Apply Loading
+- [X] Apply Loading
 
 <br />
 

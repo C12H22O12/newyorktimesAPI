@@ -43,13 +43,15 @@ function Home({
 
   return (
     <div className="ArticleLayout">
+      {articleList.length === 0 ? <Loading /> : null}
+
       {/* Toast 생성 */}
       {toastOn.isToast && (
         <ToastContainer aboutToast={toastOn} closeHandler={toastCloseHandler} />
       )}
 
       {/* Error 발생 시 NoData layout 보여주기 */}
-      {toastOn.type === "error" ? (
+      {articleList.length !== 0 && toastOn.type === "error" ? (
         <NoData
           type={"noData"}
           content={noDataText}
