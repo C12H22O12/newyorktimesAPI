@@ -7,19 +7,19 @@ import NationCompo from "@src/present/component/NationCompo/NationCompo";
 
 import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 
-import { NationCompoTypes } from "@src/types/Filter";
+import { FilterType, NationCompoTypes } from "@src/types/Filter";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
-function FilterModal({ onClose }: any) {
-  const [query, setQuery] = useState({
-    headLine: "",
-    date: "",
-    country: "",
-  });
+type FilterModalProps = {
+  onClose: any,
+  query : FilterType
+}
+
+function FilterModal({ onClose, query }: FilterModalProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [inputDate, setInputDate] = useState<string>("날짜를 선택해주세요");
 
@@ -53,10 +53,16 @@ function FilterModal({ onClose }: any) {
     </div>
   );
 
+  // Apply Filter
+  const filterhandler = () => {
+    onClose()
+  }
+
   return (
     <div>
       <div id="background" onClick={onClose} />
       <div className="modalBody">
+        {/* Headline */}
         <div className="modalCompo">
           <ModalHeader content="헤드라인" />
           <input
@@ -65,6 +71,8 @@ function FilterModal({ onClose }: any) {
             placeholder="검색하실 헤드라인을 입력해주세요."
           />
         </div>
+
+        {/* Datepicker */}
         <div className="modalCompo">
           <ModalHeader content="날짜" />
           <DatePicker
@@ -74,11 +82,15 @@ function FilterModal({ onClose }: any) {
             customInput={datepickerPlaceholder}
           />
         </div>
+
+        {/* Country */}
         <div className="modalCompo">
           <ModalHeader content="국가" />
           <div className="nations">{mappingNation}</div>
         </div>
-        <Button content="필터 적용하기" />
+
+        {/* Submit */}
+        <Button content="필터 적용하기" handler={filterhandler}/>
       </div>
     </div>
   );

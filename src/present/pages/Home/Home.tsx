@@ -74,9 +74,12 @@ function Home() {
 
   return (
     <div className="ArticleLayout">
+      {/* Toast 생성 */}
       {toastOn.isToast && (
         <ToastContainer aboutToast={toastOn} closeHandler={toastCloseHandler} />
       )}
+
+      {/* Error 발생 시 NoData layout 보여주기 */}
       {toastOn.type === "error" ? (
         <NoData
           type={"noData"}

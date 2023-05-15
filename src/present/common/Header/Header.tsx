@@ -5,9 +5,15 @@ import { ReactComponent as Search } from "@assets/icon/search_icon.svg";
 import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 import Modal from "@src/present/component/Modal/Modal";
 import FilterModal from "@src/present/layout/FilterModal/FilterModal";
+import { FilterType } from "@src/types/Filter";
 
 function Header() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [query, setQuery] = useState<FilterType>({
+    headLine: "전체 헤드라인",
+    date: "전체 날짜",
+    country: "전체 국가",
+  });
 
   // modal Handler
   const openHandler = () => {
@@ -39,7 +45,7 @@ function Header() {
       {headerCompos}
       {modalOpen && (
         <Modal>
-          <FilterModal onClose={closeHandler} />
+          <FilterModal onClose={closeHandler} query={query}/>
         </Modal>
       )}
     </div>
