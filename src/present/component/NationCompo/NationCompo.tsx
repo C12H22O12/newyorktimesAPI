@@ -1,15 +1,27 @@
 import React, { memo, useState } from "react";
 import "./NationCompo.style.css";
+import { NationCompoTypes } from "@src/types/Filter";
 
 type NationCompoProps = {
-  nation: string;
-  isClicked: boolean
+  nation: NationCompoTypes;
 };
 
-function NationCompo({ nation, isClicked }: NationCompoProps) {
+function NationCompo({ nation }: NationCompoProps) {
+  const { country, value } = nation;
 
   return (
-    <div className={`NationCompo ${isClicked ? "active" : null}`}>{nation}</div>
+    <>
+      <input
+        id={country}
+        type="checkbox"
+        name={country}
+        className="nationInput"
+        value={value}
+      />
+      <label htmlFor={country} className="NationCompo">
+        {country}
+      </label>
+    </>
   );
 }
 

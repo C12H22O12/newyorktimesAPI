@@ -32,11 +32,11 @@ npm run dev
 - [X] ArticleLayout
 - [X] Button
 - [ ] Toast
-- [ ] Filter
 
 <br />
 
 ### Filter
+- [ ] Filter
 - [X] Modal
 - [X] NationCompo
 - [ ] HeadlineInput

@@ -13,6 +13,13 @@
 }
 
 .active {
+}
+
+.nationInput {
+  display: none;
+}
+
+.nationInput:checked + label {
   color: var(--body-color);
   background-color: var(--subprimary-color);
 }
