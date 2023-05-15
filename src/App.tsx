@@ -69,7 +69,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home {...HomeProps} />} />
           <Route path={"/home"} element={<Home {...HomeProps} />} />
-          <Route path={"/scrapscreen"} element={<Scrapscreen />} />
+          <Route path={"/scrapscreen"} element={<Scrapscreen setToastOn={setToastOn} />} />
         </Routes>
         <Navbar />
       </div>

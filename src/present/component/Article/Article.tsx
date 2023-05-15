@@ -9,6 +9,7 @@ import Toast from "@component/Toast/Toast";
 import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
 import { ScrapToast, UnscrapToast } from "@src/constant/toast";
+import { useScrapStore } from "@src/store/useScrapStore";
 
 type ArticleProps = {
   item: ArticleType;
@@ -16,6 +17,7 @@ type ArticleProps = {
 };
 
 function Article({ item, setToastOn }: ArticleProps) {
+  const { addScraps, subScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
 
   // Date
@@ -37,8 +39,10 @@ function Article({ item, setToastOn }: ArticleProps) {
     e.stopPropagation(); //Stop Event Bubbling
     setScrap(!scrap);
     if (scrap) {
+      subScraps(item)
       setToastOn({ ...UnscrapToast });
     } else {
+      addScraps(item)
       setToastOn({ ...ScrapToast });
     }
   };
