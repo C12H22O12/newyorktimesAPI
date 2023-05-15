@@ -1,0 +1,39 @@
+.noData {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--background-color);
+}
+
+.noData img {
+  height: 36px;
+  width: auto;
+}
+
+.noData > div {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.noData > div {
+  text-align: center;
+}
+
+.noData div {
+  font-family: "Apple SD Gothic NeoB";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+
+  letter-spacing: -0.05em;
+  color: var(--subtext-color);
+}

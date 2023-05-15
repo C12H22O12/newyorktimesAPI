@@ -41,7 +41,7 @@ npm run dev
 - [X] NationCompo
 - [X] HeadlineInput
 - [X] Datepicker
-- [ ] Filter_NoData
+- [X] Filter_NoData
 
 <br />
 
@@ -54,16 +54,12 @@ npm run dev
 <br />
 
 ### ScrapScreen
-- [ ] Move to NoScrap
+- [X] Move to NoScrap
 - [ ] Scrap
-
-<br />
-
-### ScrapScreen
-- [ ] ScrapScreen_NoData
 
 <br />
 
 ### Error Handling
 - [X] 401
 - [X] 429
+- [X] NoData

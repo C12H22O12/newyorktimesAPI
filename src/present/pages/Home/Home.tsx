@@ -5,8 +5,9 @@ import Article from "@src/present/component/Article/Article";
 import { ArticleType } from "@src/types/Article";
 import Loading from "@src/present/layout/Loading/Loading";
 import useInfinite from "@src/actions/hooks/useInfinite";
-import ToastContainer from "@src/present/component/ToastContainer/ToastContainer";
+import ToastContainer from "@src/present/layout/ToastContainer/ToastContainer";
 import { ToastType } from "@src/types/Toast";
+import NoData from "@src/present/layout/NoData/NoData";
 
 function Home() {
   const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
@@ -35,7 +36,7 @@ function Home() {
           isToast: true,
           type: "error",
           contentHeader: "Error",
-          contentBody: "에러가 발생했습니다. 잠시 후 다시 시도해주세요.",
+          contentBody: `데이터를 불러올 수 없습니다.`,
         });
       }
     });
@@ -58,12 +59,36 @@ function Home() {
     });
   };
 
+  // reloadHandler
+  const reloadHandler = () => {
+    location.reload();
+  };
+
+  const noDataText = (
+    <div>
+      오류가 발생했습니다.
+      <br />
+      잠시 후 새로고침 해주세요
+    </div>
+  );
+
   return (
     <div className="ArticleLayout">
       {toastOn.isToast && (
         <ToastContainer aboutToast={toastOn} closeHandler={toastCloseHandler} />
       )}
-      {articles} {moreData ? <div ref={target} /> : null}
+      {toastOn.type === "error" ? (
+        <NoData
+          type={"noData"}
+          content={noDataText}
+          buttonContent={"새로고침 하기"}
+          handler={reloadHandler}
+        />
+      ) : (
+        <>
+          {articles} {moreData ? <div ref={target} /> : null}
+        </>
+      )}
     </div>
   );
 }
