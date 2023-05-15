@@ -1,15 +1,23 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
+import { ToastType } from "@src/types/Toast";
+
+import Toast from "@component/Toast/Toast";
+
 import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
+import { ScrapToast, UnscrapToast } from "@src/constant/toast";
 
 type ArticleProps = {
   item: ArticleType;
+  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>;
 };
 
-function Article({ item }: ArticleProps) {
+function Article({ item, setToastOn }: ArticleProps) {
+  const [scrap, setScrap] = useState<boolean>(false);
+
   // Date
   const publicDate = item.pub_date.slice(0, 10);
   const weekDayIdx = new Date(publicDate).getDay();
@@ -24,11 +32,26 @@ function Article({ item }: ArticleProps) {
     window.location.href = item.web_url;
   };
 
+  // scrapHandler
+  const scrapHandler = (e) => {
+    e.stopPropagation(); //Stop Event Bubbling
+    setScrap(!scrap);
+    if (scrap) {
+      setToastOn({ ...UnscrapToast });
+    } else {
+      setToastOn({ ...ScrapToast });
+    }
+  };
+
   return (
     <div className="Article" onClick={moveHandler}>
       <div className="__headline">
         <div>{item.headline.main}</div>
-        <img src={StarBlank} alt={"scrap"} />
+        {scrap ? (
+          <img src={StarFill} alt={"scrap"} onClick={scrapHandler} />
+        ) : (
+          <img src={StarBlank} alt={"scrap"} onClick={scrapHandler} />
+        )}
       </div>
       <div className="__footer">
         <div>

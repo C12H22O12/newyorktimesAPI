@@ -45,6 +45,10 @@
 .Article .__headline img {
   height: 15px;
   cursor: pointer;
+  
+  position: relative;
+  z-index: 50;
+  top:2px;
 }
 
 .Article .__footer {

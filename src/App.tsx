@@ -30,9 +30,9 @@ function App() {
 
   useEffect(() => {
     if ("q".includes(url)) {
-      console.log("HI")
+      console.log("HI");
       setArticleList([]);
-      setPage(1)
+      setPage(1);
     }
   }, [url]);
 
@@ -58,6 +58,7 @@ function App() {
     toastCloseHandler: toastCloseHandler,
     moreData: moreData,
     target: target,
+    setToastOn: setToastOn,
   };
 
   return (
