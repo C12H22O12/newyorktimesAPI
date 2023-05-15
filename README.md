@@ -55,12 +55,17 @@ npm run dev
 
 ### ScrapScreen
 - [X] Move to NoScrap
-- [ ] Scrap
+- [X] Scrap
+- [ ] SaveLocalStorage
 
 <br />
 
 ### Error Handling
 - [X] 401
 - [X] 429
+- [ ] 404 Page
 - [X] NoData
 - [ ] No Change in useData url
+- [X] Article Scrap state
+- [ ] No Change on filter when change Page
+- [ ] Scrap Duplicated

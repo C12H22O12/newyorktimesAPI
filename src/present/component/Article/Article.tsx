@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
@@ -10,6 +10,7 @@ import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
 import { ScrapToast, UnscrapToast } from "@src/constant/toast";
 import { useScrapStore } from "@src/store/useScrapStore";
+import { useLocation } from "react-router-dom";
 
 type ArticleProps = {
   item: ArticleType;
@@ -17,8 +18,17 @@ type ArticleProps = {
 };
 
 function Article({ item, setToastOn }: ArticleProps) {
-  const { addScraps, subScraps } = useScrapStore((state) => state);
+  const location = useLocation().pathname;
+  const { scraps, addScraps, subScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (location === "/scrapscreen") setScrap(true);
+  }, [location]);
+
+  useEffect(() => {
+    localStorage.setItem("scraps", scraps.join('/'));
+  }, [scrap]);
 
   // Date
   const publicDate = item.pub_date.slice(0, 10);
@@ -39,10 +49,10 @@ function Article({ item, setToastOn }: ArticleProps) {
     e.stopPropagation(); //Stop Event Bubbling
     setScrap(!scrap);
     if (scrap) {
-      subScraps(item)
+      subScraps(item);
       setToastOn({ ...UnscrapToast });
     } else {
-      addScraps(item)
+      addScraps(item);
       setToastOn({ ...ScrapToast });
     }
   };
