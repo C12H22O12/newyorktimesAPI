@@ -16,6 +16,10 @@
   background-color: var(--background-color);
 }
 
+.scrapExist {
+  justify-content: flex-start !important;
+}
+
 .Article {
   background-color: var(--body-color);
 
@@ -45,6 +49,9 @@
 .Article .__headline img {
   height: 15px;
   cursor: pointer;
+  
+  position: relative;
+  top:2px;
 }
 
 .Article .__footer {

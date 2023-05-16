@@ -12,8 +12,11 @@ import Navbar from "@present/common/Navbar/Navbar";
 import Home from "@present/pages/Home/Home";
 import Scrapscreen from "@present/pages/Scrapscreen/Scrapscreen";
 import { useDataTypes } from "./types/Article";
+import { useScrapStore } from "./store/useScrapStore";
 
 function App() {
+  const { setScraps } = useScrapStore((state) => state);
+
   const [url, setUrl] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
@@ -25,14 +28,19 @@ function App() {
   });
 
   useEffect(() => {
+    const scrapsLocal = localStorage.getItem('scraps')
+    setScraps(JSON.parse(scrapsLocal))
+  }, []);
+
+  useEffect(() => {
     setUrl(`&page=${page}`);
   }, [page]);
 
   useEffect(() => {
     if ("q".includes(url)) {
-      console.log("HI")
+      console.log("HI");
       setArticleList([]);
-      setPage(1)
+      setPage(1);
     }
   }, [url]);
 
@@ -58,6 +66,7 @@ function App() {
     toastCloseHandler: toastCloseHandler,
     moreData: moreData,
     target: target,
+    setToastOn: setToastOn,
   };
 
   return (
@@ -68,7 +77,10 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home {...HomeProps} />} />
           <Route path={"/home"} element={<Home {...HomeProps} />} />
-          <Route path={"/scrapscreen"} element={<Scrapscreen />} />
+          <Route
+            path={"/scrapscreen"}
+            element={<Scrapscreen setToastOn={setToastOn} />}
+          />
         </Routes>
         <Navbar />
       </div>

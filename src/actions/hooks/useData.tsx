@@ -4,6 +4,7 @@ import { ToastType } from "@src/types/Toast";
 import useInfinite from "@src/actions/hooks/useInfinite";
 import { getAsync } from "@src/actions/modules/axios";
 import { ArticleType } from "@src/types/Article";
+import { ErrorToast } from "@src/constant/toast";
 
 type useDataProps = {
   url: string;
@@ -27,12 +28,7 @@ function useData({ url = "", setToastOn, setPage, setArticleList }: useDataProps
         });
       } else {
         setMoreDate(false);
-        setToastOn({
-          isToast: true,
-          type: "error",
-          contentHeader: "Error",
-          contentBody: `데이터를 불러올 수 없습니다.`,
-        });
+        setToastOn({...ErrorToast});
       }
     });
   }, [url]);

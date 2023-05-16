@@ -14,6 +14,7 @@ type HomeProps = {
   toastCloseHandler: any;
   moreData: boolean;
   target: React.MutableRefObject<any>;
+  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>
 };
 
 function Home({
@@ -22,10 +23,11 @@ function Home({
   toastCloseHandler,
   moreData,
   target,
+  setToastOn
 }: HomeProps) {
   // create Article Component by articleList
   const articles = articleList.map((elem, idx) => {
-    return <Article key={idx} item={elem} />;
+    return <Article key={idx} item={elem} setToastOn={setToastOn} />;
   });
 
   // reloadHandler for Error
