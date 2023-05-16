@@ -1,19 +1,24 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import "./Navbar.style.css";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { ReactComponent as Home } from "@assets/icon/home_icon.svg";
 import { ReactComponent as Scrap } from "@assets/icon/scrap_icon.svg";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [nowPage, setNowPage] = useState("home");
+  const location = useLocation().pathname;
+  const [nowPage, setNowPage] = useState("/home");
 
   const pageHandler = (e) => {
     setNowPage(e.target.value);
-    navigate(`/${e.target.value}`)
+    navigate(e.target.value);
   };
+
+  useEffect(() => {
+    setNowPage(location);
+  }, [location]);
 
   return (
     <div id="Navbar">
@@ -22,7 +27,7 @@ function Navbar() {
         name="navbar"
         value="home"
         id="home"
-        checked={nowPage === "home"}
+        checked={nowPage === "/home"}
         onChange={pageHandler}
       />
       <label htmlFor="home" className="__navCompo">
@@ -34,7 +39,7 @@ function Navbar() {
         name="navbar"
         value="scrapscreen"
         id="scrapscreen"
-        checked={nowPage === "scrapscreen"}
+        checked={nowPage === "/scrapscreen"}
         onChange={pageHandler}
       />
       <label htmlFor="scrapscreen" className="__navCompo">
