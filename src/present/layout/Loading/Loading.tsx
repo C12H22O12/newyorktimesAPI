@@ -1,23 +1,17 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useEffect, memo } from "react";
 import "./Loading.style.css";
 
 import { useUrlStore } from "@store/useUrlStore";
 
 // svg file : https://codepen.io/aurer/pen/ZEJxpO?editors=1100
 function Loading() {
-  const { articleList, setDefaultUrl, setInitPage } = useUrlStore(
+  const { setInitPage } = useUrlStore(
     (state) => state
   );
-  const [flag, setFlag] = useState(true);
 
   useEffect(() => {
     setInitPage();
-
-    if (flag) {
-      setFlag(false);
-      setDefaultUrl();
-    }
-  }, [articleList]);
+  }, []);
 
   return (
     <div className="Container">
