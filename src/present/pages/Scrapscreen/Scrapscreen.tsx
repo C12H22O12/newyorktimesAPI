@@ -5,7 +5,7 @@ import NoData from "@src/present/layout/NoData/NoData";
 import { useNavigate } from "react-router-dom";
 import Article from "@component/Article/Article";
 
-function Scrapscreen({ setToastOn }) {
+function Scrapscreen() {
   const navigate = useNavigate();
   const { scraps, setScraps } = useScrapStore((state: any) => state)
 
@@ -24,7 +24,7 @@ function Scrapscreen({ setToastOn }) {
 
   // create Article Component by scraps
   const articles = scraps.map((elem, idx) => {
-    return <Article key={idx} item={elem} setToastOn={setToastOn} />;
+    return <Article key={idx} item={elem}  />;
   });
 
   return (

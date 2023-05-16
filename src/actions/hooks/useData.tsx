@@ -1,52 +1,44 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { ToastType } from "@src/types/Toast";
 
 import useInfinite from "@src/actions/hooks/useInfinite";
 import { getAsync } from "@src/actions/modules/axios";
-import { ArticleType } from "@src/types/Article";
-import { ErrorToast } from "@src/constant/toast";
-import { useUrlStore } from "@src/store/useUrlStore";
+import { ErrorToast } from "@constant/toast";
+import { useUrlStore } from "@store/useUrlStore";
+import { useToastStore } from "@store/useToastStore";
 
-type useDataProps = {
-  url: string;
-  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>;
-  setPage?: React.Dispatch<React.SetStateAction<number>>;
-  setArticleList: React.Dispatch<React.SetStateAction<Array<ArticleType>>>;
-};
-
-function useData({ setToastOn }: useDataProps) {
-  const { url, articleList, page, setPage, setArticleList } = useUrlStore(
+function useData() {
+  const { setToast } = useToastStore((state) => state);
+  const { url, articleList, setArticleList } = useUrlStore(
     (state) => state
   );
   const [moreData, setMoreDate] = useState<boolean>(true);
-
-  // apply filter
-  useEffect(() => {
-    if (
-      url.includes("&q") ||
-      url.includes("&begin_date") ||
-      url.includes("&fq")
-    ) {
-      setArticleList([])
-      getData();
-    }
-  }, [url]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // getDate
   const getData = useCallback(async () => {
+    
     await getAsync(url).then((res) => {
       if (res.isSuccess) {
+        setIsLoading(true);
+        console.log(url);
         setArticleList(articleList.concat(...res.result.docs));
-        setPage((page + 1) % 5);
       } else {
         setMoreDate(false);
-        setToastOn({ ...ErrorToast });
+        setToast({ ...ErrorToast });
       }
+
+      setIsLoading(false);
     });
+  }, [url]);
+
+  useEffect(() => {
+    getData();
   }, [url]);
 
   // Infinite scroll => observer and get new data
   const target = useInfinite(async (entry, observer) => {
+    if (isLoading) return;
+    console.log(isLoading, "로딩중이 아닌가요?");
     await getData();
   });
 

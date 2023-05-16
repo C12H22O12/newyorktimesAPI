@@ -2,21 +2,21 @@ import React, { memo, useEffect, useState } from "react";
 import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
-import { ToastType } from "@src/types/Toast";
 
 import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
 import { ScrapToast, UnscrapToast } from "@src/constant/toast";
 import { useScrapStore } from "@src/store/useScrapStore";
 import { useLocation } from "react-router-dom";
+import { useToastStore } from "@src/store/useToastStore";
 
 type ArticleProps = {
   item: ArticleType;
-  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>;
 };
 
-function Article({ item, setToastOn }: ArticleProps) {
+function Article({ item }: ArticleProps) {
   const location = useLocation().pathname;
+  const { setToast } = useToastStore((state) => state);
   const { scraps, addScraps, subScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
 
@@ -48,10 +48,10 @@ function Article({ item, setToastOn }: ArticleProps) {
     setScrap(!scrap);
     if (scrap) {
       subScraps(item);
-      setToastOn({ ...UnscrapToast });
+      setToast({ ...UnscrapToast });
     } else {
       addScraps(item);
-      setToastOn({ ...ScrapToast });
+      setToast({ ...ScrapToast });
     }
   };
 

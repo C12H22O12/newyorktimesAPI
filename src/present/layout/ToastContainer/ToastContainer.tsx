@@ -1,13 +1,9 @@
-import { ToastType } from "@src/types/Toast";
+import { useToastStore } from "@src/store/useToastStore";
 import React, { memo, useEffect, useState } from "react";
 import "./ToastContainer.style.css";
 
-type ToastProps = {
-  aboutToast: ToastType;
-  closeHandler: any;
-};
-
-function ToastContainer({ aboutToast, closeHandler }: ToastProps) {
+function ToastContainer() {
+  const {toast, closeToast} = useToastStore(state => state)
   const [isAppear, setIsAppear] = useState(true);
 
   useEffect(() => {
@@ -16,7 +12,7 @@ function ToastContainer({ aboutToast, closeHandler }: ToastProps) {
     }, 4000);
 
     const apperTimer = setTimeout(() => {
-      closeHandler();
+      closeToast();
     }, 5000);
 
     return () => {
@@ -26,9 +22,9 @@ function ToastContainer({ aboutToast, closeHandler }: ToastProps) {
   }, []);
 
   return (
-    <div className={`toastContainer ${aboutToast.type} ${!isAppear && "disappear"}`}>
-      <div>{aboutToast.contentHeader}</div>
-      <div>{aboutToast.contentBody}</div>
+    <div className={`toastContainer ${toast.type} ${!isAppear && "disappear"}`}>
+      <div>{toast.contentHeader}</div>
+      <div>{toast.contentBody}</div>
     </div>
   );
 }
