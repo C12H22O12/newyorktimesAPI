@@ -9,6 +9,7 @@ type urlStoreType = {
 
   //   ArticleList
   setArticleList: (list: Array<ArticleType>) => void;
+  setInfiniteList: (list: Array<ArticleType>) => void;
 
   //   page
   setPage: (number: number) => void;
@@ -28,6 +29,13 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
   //   ArticleList
   setArticleList: (list) => {
     set(() => ({ articleList: [...list] }));
+  },
+
+  setInfiniteList: (list) => {
+    set((state) => ({
+      articleList: [...state.articleList, ...list],
+      page: (state.page + 1) % 5,
+    }));
   },
 
   //   page

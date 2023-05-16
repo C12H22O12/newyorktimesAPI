@@ -12,23 +12,14 @@ import { useUrlStore } from "@store/useUrlStore";
 import { useToastStore } from "@store/useToastStore";
 
 function Home() {
-  const { articleList, setDefaultUrl, setInitPage, page, setPage } =
-    useUrlStore((state) => state);
+  const { articleList } = useUrlStore((state) => state);
   const { toast } = useToastStore((state) => state);
-  const [flag, setFlag] = useState(true);
 
+  // Article Component
   const list = useMemo(() => {
     return articleList.map((elem, idx) => {
       return <Article key={idx} item={elem} />;
     });
-  }, [articleList]);
-
-  useEffect(() => {
-    if (flag) {
-      setFlag(false);
-      setInitPage();
-      setDefaultUrl();
-    }
   }, [articleList]);
 
   // reloadHandler for Error
