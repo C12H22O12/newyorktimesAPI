@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
@@ -21,18 +21,24 @@ function Article({ item }: ArticleProps) {
   const { scraps, addScraps, subScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
     if (location === "/scrapscreen") setScrap(true);
 
     if (checkArrayIn(scraps, item.uri)) {
-      setScrap(true)
+      setScrap(true);
     } else {
-      setScrap(false)
+      setScrap(false);
     }
   }, [location]);
 
   useEffect(() => {
-    localStorage.setItem("scraps", JSON.stringify(removeDuplicate(scraps)));
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      localStorage.setItem("scraps", JSON.stringify(removeDuplicate(scraps)));
+    }
   }, [scrap]);
 
   // Date
