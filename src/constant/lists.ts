@@ -10,11 +10,3 @@ export const nationList: Array<NationCompoTypes> = [
   { country: "프랑스", value: "France" },
   { country: "영국", value: "England" },
 ];
-
-export const returnName = (value: string) => {
-  for(const i of nationList) {
-    if (i.value === value) {
-      return i.country
-    }
-  }
-};

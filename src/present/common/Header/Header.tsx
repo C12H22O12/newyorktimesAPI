@@ -8,9 +8,11 @@ import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
 import { useUrlStore } from "@src/store/useUrlStore";
 import { format } from "date-fns";
-import { returnName } from "@src/constant/lists";
+import { returnName } from "@action/modules/dummy";
+import { useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation().pathname;
   const { setFilterUrl } = useUrlStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
@@ -18,6 +20,14 @@ function Header() {
     date: null,
     country: [],
   });
+
+  useEffect(() => {
+    setQuery({
+      headLine: "",
+      date: null,
+      country: [],
+    });
+  }, [location]);
 
   useEffect(() => {
     let tmpUrl = "";
@@ -68,7 +78,7 @@ function Header() {
       svg: null,
       content:
         query.country.length !== 0
-          ? `${returnName(query.country[0])} 외 ${query.country.length - 1}개`
+          ? returnName(query.country)
           : "",
     },
   ];

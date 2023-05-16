@@ -66,7 +66,7 @@ npm run dev
 - [X] NoData
 - [X] No Change in useData url
 - [X] Article Scrap state
-- [ ] No Change on filter when change Page
+- [X] No Change on filter when change Page
 - [ ] Scrap Duplicated
 - [X] Date Filter showing
 - [X] Country Filter
