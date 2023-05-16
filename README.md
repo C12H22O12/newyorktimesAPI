@@ -74,3 +74,4 @@ npm run dev
 - [X] Show article list after code refactored
 - [X] Home Component occurs too many rendering
 - [X] Page not changed when infinite scroll
+- [ ] Navbar changed when reload page

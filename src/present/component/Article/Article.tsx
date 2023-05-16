@@ -9,6 +9,7 @@ import { ScrapToast, UnscrapToast } from "@src/constant/toast";
 import { useScrapStore } from "@src/store/useScrapStore";
 import { useLocation } from "react-router-dom";
 import { useToastStore } from "@src/store/useToastStore";
+import { checkArrayIn, removeDuplicate } from "@src/actions/modules/scrap";
 
 type ArticleProps = {
   item: ArticleType;
@@ -22,11 +23,17 @@ function Article({ item }: ArticleProps) {
 
   useEffect(() => {
     if (location === "/scrapscreen") setScrap(true);
+
+    if (checkArrayIn(scraps, item.uri)) {
+      setScrap(true)
+    } else {
+      setScrap(false)
+    }
   }, [location]);
 
   useEffect(() => {
-    localStorage.setItem("scraps", JSON.stringify(scraps));
-  }, [scraps]);
+    localStorage.setItem("scraps", JSON.stringify(removeDuplicate(scraps)));
+  }, [scrap]);
 
   // Date
   const publicDate = item.pub_date.slice(0, 10);
