@@ -69,8 +69,8 @@ npm run dev
 - [ ] No Change on filter when change Page
 - [ ] Scrap Duplicated
 - [X] Date Filter showing
-- [ ] Country Filter
+- [X] Country Filter
 - [ ] Apply newest article list on Home
 - [X] Show article list after code refactored
 - [X] Home Component occurs too many rendering
-- [ ] Page not changed when infinite scroll
+- [X] Page not changed when infinite scroll

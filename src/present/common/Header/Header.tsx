@@ -8,6 +8,7 @@ import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
 import { useUrlStore } from "@src/store/useUrlStore";
 import { format } from "date-fns";
+import { returnName } from "@src/constant/lists";
 
 function Header() {
   const { setFilterUrl } = useUrlStore((state) => state);
@@ -26,10 +27,7 @@ function Header() {
     }
 
     if (query.date !== null) {
-      const tmpDate = format(
-        query.date,
-        "yyyyMMdd"
-      )
+      const tmpDate = format(query.date, "yyyyMMdd");
       tmpUrl += `&begin_date=${tmpDate}&end_date=${tmpDate}`;
     }
 
@@ -66,7 +64,13 @@ function Header() {
       svg: <Calendar />,
       content: query.date !== null ? format(query.date, "yyyy.MM.dd") : "",
     },
-    { svg: null, content: query.country },
+    {
+      svg: null,
+      content:
+        query.country.length !== 0
+          ? `${returnName(query.country[0])} 외 ${query.country.length - 1}개`
+          : "",
+    },
   ];
 
   const headerCompos = content.map((elem, idx) => {
