@@ -5,6 +5,7 @@ import useInfinite from "@src/actions/hooks/useInfinite";
 import { getAsync } from "@src/actions/modules/axios";
 import { ArticleType } from "@src/types/Article";
 import { ErrorToast } from "@src/constant/toast";
+import { useUrlStore } from "@src/store/useUrlStore";
 
 type useDataProps = {
   url: string;
@@ -13,22 +14,21 @@ type useDataProps = {
   setArticleList: React.Dispatch<React.SetStateAction<Array<ArticleType>>>;
 };
 
-function useData({ url = "", setToastOn, setPage, setArticleList }: useDataProps) {
+function useData({ setToastOn }: useDataProps) {
+  const { url, articleList, page, setPage, setArticleList } = useUrlStore(
+    (state) => state
+  );
   const [moreData, setMoreDate] = useState<boolean>(true);
 
   // getDate
   const getData = useCallback(async () => {
-    console.log(url)
     await getAsync(url).then((res) => {
       if (res.isSuccess) {
-        setArticleList((prev) => prev.concat(...res.result.docs));
-        setPage((prev) => {
-          const next = prev + 1;
-          return next >= 5 ? 1 : next;
-        });
+        setArticleList(articleList.concat(...res.result.docs));
+        setPage((page + 1) % 5);
       } else {
         setMoreDate(false);
-        setToastOn({...ErrorToast});
+        setToastOn({ ...ErrorToast });
       }
     });
   }, [url]);

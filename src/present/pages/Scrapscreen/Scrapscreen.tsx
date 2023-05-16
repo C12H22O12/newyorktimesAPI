@@ -7,7 +7,12 @@ import Article from "@component/Article/Article";
 
 function Scrapscreen({ setToastOn }) {
   const navigate = useNavigate();
-  const { scraps } = useScrapStore((state: any) => state)
+  const { scraps, setScraps } = useScrapStore((state: any) => state)
+
+  useEffect(() => {
+    const scrapsLocal = localStorage.getItem("scraps");
+    setScraps(JSON.parse(scrapsLocal));
+  }, []);
 
   //   check No Scrap
   const noscrapCheck = scraps.length === 0 ? true : false;

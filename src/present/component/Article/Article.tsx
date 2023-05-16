@@ -4,8 +4,6 @@ import "./Article.style.css";
 import { ArticleType } from "@src/types/Article";
 import { ToastType } from "@src/types/Toast";
 
-import Toast from "@component/Toast/Toast";
-
 import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
 import { ScrapToast, UnscrapToast } from "@src/constant/toast";
@@ -27,7 +25,6 @@ function Article({ item, setToastOn }: ArticleProps) {
   }, [location]);
 
   useEffect(() => {
-    console.log(scrap, scraps)
     localStorage.setItem("scraps", JSON.stringify(scraps));
   }, [scraps]);
 

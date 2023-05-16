@@ -4,27 +4,22 @@ import Article from "@component/Article/Article";
 import Loading from "@layout/Loading/Loading";
 import ToastContainer from "@layout/ToastContainer/ToastContainer";
 
+import useData from "@src/actions/hooks/useData";
+
 import NoData from "@layout/NoData/NoData";
-import { ArticleType } from "@src/types/Article";
+import { useDataTypes } from "@src/types/Article";
+import { useUrlStore } from "@store/useUrlStore";
 import { ToastType } from "@src/types/Toast";
 
 type HomeProps = {
-  articleList: Array<ArticleType>;
   toastOn: ToastType;
-  toastCloseHandler: any;
-  moreData: boolean;
-  target: React.MutableRefObject<any>;
-  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>
+  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>;
 };
 
-function Home({
-  articleList,
-  toastOn,
-  toastCloseHandler,
-  moreData,
-  target,
-  setToastOn
-}: HomeProps) {
+function Home({ toastOn, setToastOn }: HomeProps) {
+  const { url, page, setPage, articleList, setArticleList, setDefaultUrl } =
+    useUrlStore((state) => state);
+
   // create Article Component by articleList
   const articles = articleList.map((elem, idx) => {
     return <Article key={idx} item={elem} setToastOn={setToastOn} />;
@@ -33,6 +28,32 @@ function Home({
   // reloadHandler for Error
   const reloadHandler = () => {
     location.reload();
+  };
+
+  useEffect(() => {
+    setDefaultUrl();
+  }, [page]);
+
+  useEffect(() => {
+    if ("q".includes(url)) {
+      setArticleList([]);
+      setPage(1);
+    }
+  }, [url]);
+
+  // get Article List
+  const { moreData, target }: useDataTypes = useData({
+    url: url,
+    setToastOn: setToastOn,
+    setPage: setPage,
+    setArticleList: setArticleList,
+  });
+
+  // ToastHandler
+  const toastCloseHandler = (): void => {
+    setToastOn((prev) => {
+      return { ...prev, isToast: false };
+    });
   };
 
   const noDataText = (

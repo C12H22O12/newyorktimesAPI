@@ -7,11 +7,7 @@ import Modal from "@src/present/component/Modal/Modal";
 import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
 
-type HeaderProps = {
-  setUrl: any;
-};
-
-function Header({ setUrl }: HeaderProps) {
+function Header() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -42,7 +38,7 @@ function Header({ setUrl }: HeaderProps) {
     console.log(tmpUrl);
 
     return () => {
-      setUrl(tmpUrl);
+      // setUrl(tmpUrl);
     };
   }, [query]);
 
