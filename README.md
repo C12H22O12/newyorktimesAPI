@@ -36,7 +36,7 @@ npm run dev
 <br />
 
 ### Filter
-- [X] Filter
+- [ ] Filter
 - [X] Modal
 - [X] NationCompo
 - [X] HeadlineInput
@@ -56,7 +56,7 @@ npm run dev
 ### ScrapScreen
 - [X] Move to NoScrap
 - [X] Scrap
-- [X] Save LocalStorage
+- [ ] Save LocalStorage
 
 <br />
 
@@ -69,9 +69,9 @@ npm run dev
 - [X] No Change on filter when change Page
 - [X] Scrap Duplicated
 - [X] Date Filter showing
-- [X] Country Filter
+- [X] Country Filter showing
 - [ ] Apply newest article list on Home
 - [X] Show article list after code refactored
 - [X] Home Component occurs too many rendering
 - [X] Page not changed when infinite scroll
-- [ ] Navbar changed when reload page
+- [X] Navbar changed when reload page
