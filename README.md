@@ -63,12 +63,11 @@ npm run dev
 ### Error Handling
 - [X] 401
 - [X] 429
-- [ ] 404 Page
 - [X] NoData
 - [X] No Change in useData url
 - [X] Article Scrap state
 - [ ] No Change on filter when change Page
 - [ ] Scrap Duplicated
-- [ ] Date Filter
+- [X] Date Filter showing
 - [ ] Country Filter
 - [ ] Apply newest article list on Home

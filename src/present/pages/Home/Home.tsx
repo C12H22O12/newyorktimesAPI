@@ -66,6 +66,8 @@ function Home({ toastOn, setToastOn }: HomeProps) {
     </div>
   );
 
+  console.log(articleList)
+
   return (
     <div className="ArticleLayout">
       {articleList.length === 0 ? <Loading /> : null}

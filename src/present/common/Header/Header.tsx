@@ -7,13 +7,14 @@ import Modal from "@src/present/component/Modal/Modal";
 import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
 import { useUrlStore } from "@src/store/useUrlStore";
+import { format } from "date-fns";
 
 function Header() {
   const { setFilterUrl } = useUrlStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
-    date: "",
+    date: null,
     country: [],
   });
 
@@ -24,8 +25,12 @@ function Header() {
       tmpUrl += `&q=${query.headLine}`;
     }
 
-    if (query.date !== "") {
-      tmpUrl += `&begin_date=${query.date}&end_date=${query.date}`;
+    if (query.date !== null) {
+      const tmpDate = format(
+        query.date,
+        "yyyyMMdd"
+      )
+      tmpUrl += `&begin_date=${tmpDate}&end_date=${tmpDate}`;
     }
 
     if (query.country.length !== 0) {
@@ -57,7 +62,10 @@ function Header() {
   // Header Components
   const content = [
     { svg: <Search />, content: query.headLine },
-    { svg: <Calendar />, content: query.date },
+    {
+      svg: <Calendar />,
+      content: query.date !== null ? format(query.date, "yyyy.MM.dd") : "",
+    },
     { svg: null, content: query.country },
   ];
 
