@@ -12,8 +12,11 @@ import Navbar from "@present/common/Navbar/Navbar";
 import Home from "@present/pages/Home/Home";
 import Scrapscreen from "@present/pages/Scrapscreen/Scrapscreen";
 import { useDataTypes } from "./types/Article";
+import { useScrapStore } from "./store/useScrapStore";
 
 function App() {
+  const { setScraps } = useScrapStore((state) => state);
+
   const [url, setUrl] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [articleList, setArticleList] = useState<Array<ArticleType | any>>([]);
@@ -23,6 +26,11 @@ function App() {
     contentHeader: "",
     contentBody: "",
   });
+
+  useEffect(() => {
+    const scrapsLocal = localStorage.getItem('scraps')
+    setScraps(JSON.parse(scrapsLocal))
+  }, []);
 
   useEffect(() => {
     setUrl(`&page=${page}`);
@@ -69,7 +77,10 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home {...HomeProps} />} />
           <Route path={"/home"} element={<Home {...HomeProps} />} />
-          <Route path={"/scrapscreen"} element={<Scrapscreen setToastOn={setToastOn} />} />
+          <Route
+            path={"/scrapscreen"}
+            element={<Scrapscreen setToastOn={setToastOn} />}
+          />
         </Routes>
         <Navbar />
       </div>

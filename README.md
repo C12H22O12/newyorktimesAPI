@@ -56,7 +56,7 @@ npm run dev
 ### ScrapScreen
 - [X] Move to NoScrap
 - [X] Scrap
-- [ ] SaveLocalStorage
+- [X] Save LocalStorage
 
 <br />
 

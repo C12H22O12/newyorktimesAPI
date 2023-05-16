@@ -3,15 +3,15 @@ import { create } from "zustand";
 
 type scrapStoreType = {
   scraps: Array<ArticleType>;
-  setScraps: () => void;
+  setScraps: (lst: any) => void;
   addScraps: (item: ArticleType) => void;
   subScraps: (item: ArticleType) => void;
 };
 
 export const useScrapStore = create<scrapStoreType>()((set) => ({
   scraps: [],
-  setScraps: () => {
-    localStorage.getItem("scraps");
+  setScraps: (lst) => {
+    set(() => ({ scraps: [...lst] }));
   },
   addScraps: (item: ArticleType) => {
     set((state) => ({ scraps: [...state.scraps, item] }));

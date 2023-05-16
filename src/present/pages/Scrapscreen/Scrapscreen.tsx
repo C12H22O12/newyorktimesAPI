@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useScrapStore } from "@store/useScrapStore";
 
 import NoData from "@src/present/layout/NoData/NoData";
@@ -7,9 +7,9 @@ import Article from "@component/Article/Article";
 
 function Scrapscreen({ setToastOn }) {
   const navigate = useNavigate();
-  const scraps = useScrapStore((state: any) => state.scraps);
+  const { scraps } = useScrapStore((state: any) => state)
 
-  console.log(scraps);
+  //   check No Scrap
   const noscrapCheck = scraps.length === 0 ? true : false;
   const noScraps = <div>저장된 스크랩이 없습니다.</div>;
 
@@ -17,7 +17,7 @@ function Scrapscreen({ setToastOn }) {
     navigate("/home");
   };
 
-  // create Article Component by articleList
+  // create Article Component by scraps
   const articles = scraps.map((elem, idx) => {
     return <Article key={idx} item={elem} setToastOn={setToastOn} />;
   });

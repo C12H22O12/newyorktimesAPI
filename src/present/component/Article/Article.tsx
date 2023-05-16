@@ -27,8 +27,9 @@ function Article({ item, setToastOn }: ArticleProps) {
   }, [location]);
 
   useEffect(() => {
-    localStorage.setItem("scraps", scraps.join('/'));
-  }, [scrap]);
+    console.log(scrap, scraps)
+    localStorage.setItem("scraps", JSON.stringify(scraps));
+  }, [scraps]);
 
   // Date
   const publicDate = item.pub_date.slice(0, 10);
