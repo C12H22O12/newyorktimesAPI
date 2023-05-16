@@ -12,8 +12,12 @@ import { useUrlStore } from "@store/useUrlStore";
 import { useToastStore } from "@store/useToastStore";
 
 function Home() {
-  const { articleList } = useUrlStore((state) => state);
+  const { articleList, setInitPage } = useUrlStore((state) => state);
   const { toast } = useToastStore((state) => state);
+
+  useEffect(() => {
+    setInitPage();
+  }, []);
 
   // Article Component
   const list = useMemo(() => {
@@ -56,7 +60,11 @@ function Home() {
       ) : (
         <>
           {list}
-          {moreData && <div ref={target} />}
+          {moreData && (
+            <div ref={target} className="beforeInfinite">
+              Loading...
+            </div>
+          )}
         </>
       )}
     </div>

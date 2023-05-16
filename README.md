@@ -67,7 +67,7 @@ npm run dev
 - [X] No Change in useData url
 - [X] Article Scrap state
 - [X] No Change on filter when change Page
-- [ ] Scrap Duplicated
+- [X] Scrap Duplicated
 - [X] Date Filter showing
 - [X] Country Filter
 - [ ] Apply newest article list on Home

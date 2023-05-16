@@ -32,7 +32,7 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
   setInfiniteList: (list) => {
     set((state) => ({
       articleList: [...state.articleList, ...list],
-      page: (state.page + 1) % 5,
+      page: state.page + 1,
       url: `&page=${state.page}`
     }));
   },

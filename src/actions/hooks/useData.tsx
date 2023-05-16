@@ -8,7 +8,7 @@ import { useToastStore } from "@store/useToastStore";
 
 function useData() {
   const { setToast } = useToastStore((state) => state);
-  const { url, setInfiniteList } = useUrlStore((state) => state);
+  const { url, setInfiniteList, setInitPage } = useUrlStore((state) => state);
   const [moreData, setMoreDate] = useState<boolean>(true);
 
   // getDate
@@ -20,6 +20,7 @@ function useData() {
       } else {
         setMoreDate(false);
         setToast({ ...ErrorToast });
+        setInitPage();
       }
     });
   }, [url]);

@@ -4,6 +4,7 @@ import { useScrapStore } from "@store/useScrapStore";
 import NoData from "@src/present/layout/NoData/NoData";
 import { useNavigate } from "react-router-dom";
 import Article from "@component/Article/Article";
+import { removeDuplicate } from "@src/actions/modules/dummy";
 
 function Scrapscreen() {
   const navigate = useNavigate();
@@ -22,8 +23,10 @@ function Scrapscreen() {
     navigate("/home");
   };
 
+  console.log(scraps)
+
   // create Article Component by scraps
-  const articles = scraps.map((elem, idx) => {
+  const articles = removeDuplicate(scraps).map((elem, idx) => {
     return <Article key={idx} item={elem}  />;
   });
 

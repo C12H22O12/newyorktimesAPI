@@ -1,18 +1,8 @@
 import React, { useEffect, memo } from "react";
 import "./Loading.style.css";
 
-import { useUrlStore } from "@store/useUrlStore";
-
 // svg file : https://codepen.io/aurer/pen/ZEJxpO?editors=1100
 function Loading() {
-  const { setInitPage } = useUrlStore(
-    (state) => state
-  );
-
-  useEffect(() => {
-    setInitPage();
-  }, []);
-
   return (
     <div className="Container">
       <div className="Loader Loader--style8" title="7">
