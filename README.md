@@ -65,7 +65,10 @@ npm run dev
 - [X] 429
 - [ ] 404 Page
 - [X] NoData
-- [ ] No Change in useData url
+- [X] No Change in useData url
 - [X] Article Scrap state
 - [ ] No Change on filter when change Page
 - [ ] Scrap Duplicated
+- [ ] Date Filter
+- [ ] Country Filter
+- [ ] Apply newest article list on Home

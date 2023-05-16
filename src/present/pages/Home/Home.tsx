@@ -41,6 +41,8 @@ function Home({ toastOn, setToastOn }: HomeProps) {
     }
   }, [url]);
 
+  console.log(url)
+
   // get Article List
   const { moreData, target }: useDataTypes = useData({
     url: url,

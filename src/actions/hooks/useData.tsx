@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { ToastType } from "@src/types/Toast";
 
 import useInfinite from "@src/actions/hooks/useInfinite";
@@ -19,6 +19,18 @@ function useData({ setToastOn }: useDataProps) {
     (state) => state
   );
   const [moreData, setMoreDate] = useState<boolean>(true);
+
+  // apply filter
+  useEffect(() => {
+    if (
+      url.includes("&q") ||
+      url.includes("&begin_date") ||
+      url.includes("&fq")
+    ) {
+      setArticleList([])
+      getData();
+    }
+  }, [url]);
 
   // getDate
   const getData = useCallback(async () => {

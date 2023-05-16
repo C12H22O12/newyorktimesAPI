@@ -21,7 +21,7 @@ type urlStoreType = {
 export const useUrlStore = create<urlStoreType>()((set) => ({
   //   states
   articleList: [],
-  page: 1,
+  page: 0,
   url: "",
 
   //   ArticleList

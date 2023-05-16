@@ -30,7 +30,6 @@ function FilterModal({ onClose, queryHandler }: FilterModalProps) {
   });
 
   useEffect(() => {
-    console.log(targetDate, inputDate);
     if (modalQuery.date === "") {
       setModalQuery((prev) => {
         return { ...prev, date: format(targetDate, "yyyyMMdd") };

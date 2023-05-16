@@ -6,8 +6,10 @@ import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 import Modal from "@src/present/component/Modal/Modal";
 import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
+import { useUrlStore } from "@src/store/useUrlStore";
 
 function Header() {
+  const { setFilterUrl } = useUrlStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -27,19 +29,15 @@ function Header() {
     }
 
     if (query.country.length !== 0) {
-      tmpUrl += `&fq=glocations:(`
+      tmpUrl += `&fq=glocations:(`;
       for (const i of query.country) {
-        tmpUrl += `"${i}",`
+        tmpUrl += `"${i}",`;
       }
 
-      tmpUrl += `)`
+      tmpUrl += `)`;
     }
 
-    console.log(tmpUrl);
-
-    return () => {
-      // setUrl(tmpUrl);
-    };
+    setFilterUrl(tmpUrl);
   }, [query]);
 
   // modal Handler
@@ -55,8 +53,6 @@ function Header() {
   const queryHandler = (modalQuery) => {
     setQuery({ ...modalQuery });
   };
-
-  console.log(query);
 
   // Header Components
   const content = [

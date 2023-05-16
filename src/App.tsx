@@ -8,7 +8,6 @@ import Header from "@present/common/Header/Header";
 import Navbar from "@present/common/Navbar/Navbar";
 import Home from "@present/pages/Home/Home";
 import Scrapscreen from "@present/pages/Scrapscreen/Scrapscreen";
-import { useScrapStore } from "./store/useScrapStore";
 
 function App() {
   const [toastOn, setToastOn] = useState<ToastType>({
