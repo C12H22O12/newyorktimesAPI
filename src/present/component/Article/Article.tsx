@@ -58,7 +58,6 @@ function Article({ item }: ArticleProps) {
   // scrapHandler
   const scrapHandler = (e) => {
     e.stopPropagation(); //Stop Event Bubbling
-    setScrap(!scrap);
     if (scrap) {
       subScraps(item);
       setToast({ ...UnscrapToast });
@@ -66,6 +65,7 @@ function Article({ item }: ArticleProps) {
       addScraps(item);
       setToast({ ...ScrapToast });
     }
+    setScrap(!scrap);
   };
 
   return (

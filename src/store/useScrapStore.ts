@@ -19,7 +19,7 @@ export const useScrapStore = create<scrapStoreType>()((set) => ({
   subScraps: (item: ArticleType) => {
     set((state) => ({
       scraps: state.scraps.filter((elem) => {
-        return elem.headline !== item.headline;
+        return elem.uri !== item.uri;
       }),
     }));
   },

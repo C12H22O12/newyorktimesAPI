@@ -8,12 +8,7 @@ import { removeDuplicate } from "@src/actions/modules/scrap";
 
 function Scrapscreen() {
   const navigate = useNavigate();
-  const { scraps, setScraps } = useScrapStore((state: any) => state)
-
-  useEffect(() => {
-    const scrapsLocal = localStorage.getItem("scraps");
-    setScraps(JSON.parse(scrapsLocal));
-  }, []);
+  const { scraps } = useScrapStore((state: any) => state)
 
   //   check No Scrap
   const noscrapCheck = scraps.length === 0 ? true : false;

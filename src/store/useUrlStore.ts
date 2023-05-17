@@ -63,8 +63,6 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
 
     const newPlusUrl = urlObj.toString().substring(url.length)
 
-    console.log(newPlusUrl)
-
     set((state) => ({
       articleList: [...state.articleList, ...list],
       page: state.page + 1,
