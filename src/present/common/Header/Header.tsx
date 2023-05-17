@@ -17,9 +17,7 @@ function Header() {
   const { setFilterUrl, setInitPage, setInitArticleList } = useUrlStore(
     (state) => state
   );
-  const { filterScraps } = useScrapStore(
-    (state) => state
-  );
+  const { filterScraps } = useScrapStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -36,7 +34,9 @@ function Header() {
   }, [location]);
 
   useEffect(() => {
-    if (location === "/home") {
+    if (location === "/scrapscreen") {
+      filterScraps(query);
+    } else {
       let tmpUrl = "";
 
       if (query.headLine !== "") {
@@ -60,8 +60,6 @@ function Header() {
       setFilterUrl(tmpUrl);
       setInitPage();
       setInitArticleList();
-    } else {
-        filterScraps(query);
     }
   }, [query]);
 
