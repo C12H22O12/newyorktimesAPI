@@ -32,7 +32,7 @@ function Home() {
   };
 
   // get Article List
-  const { moreData, target }: useDataTypes = useData();
+  const { moreData, target, isLoading }: useDataTypes = useData();
 
   const noDataText = (
     <div>
@@ -44,7 +44,7 @@ function Home() {
 
   return (
     <div className="ArticleLayout">
-      {articleList.length === 0 ? <Loading /> : null}
+      {isLoading ? <Loading /> : null}
 
       {/* Toast 생성 */}
       {toast.isToast && <ToastContainer />}

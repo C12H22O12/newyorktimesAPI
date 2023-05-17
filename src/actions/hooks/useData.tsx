@@ -12,6 +12,7 @@ function useData() {
     (state) => state
   );
   const [moreData, setMoreDate] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isFilter =
     url.includes("&q") || url.includes("&fq") || url.includes("&begin_date")
@@ -20,6 +21,7 @@ function useData() {
 
   // getDate
   const getData = useCallback(async () => {
+    setIsLoading(true);
     await getAsync(url).then((res) => {
       if (res.isSuccess) {
         if (isFilter) {
@@ -32,13 +34,14 @@ function useData() {
         setToast({ ...ErrorToast });
         setInitPage();
       }
+      setIsLoading(false);
     });
   }, [url]);
 
   // Infinite scroll => observer and get new data
   const target = useInfinite(getData);
 
-  return { moreData, target };
+  return { moreData, target, isLoading };
 }
 
 export default useData;
