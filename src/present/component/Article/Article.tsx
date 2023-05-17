@@ -18,7 +18,7 @@ type ArticleProps = {
 function Article({ item }: ArticleProps) {
   const location = useLocation().pathname;
   const { setToast } = useToastStore((state) => state);
-  const { scraps, addScraps, subScraps } = useScrapStore((state) => state);
+  const { scraps, addScraps, subScraps, initFilteredScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
 
   const isFirstRender = useRef(true);
@@ -60,9 +60,11 @@ function Article({ item }: ArticleProps) {
     e.stopPropagation(); //Stop Event Bubbling
     if (scrap) {
       subScraps(item);
+      initFilteredScraps()
       setToast({ ...UnscrapToast });
     } else {
       addScraps(item);
+      initFilteredScraps()
       setToast({ ...ScrapToast });
     }
     setScrap(!scrap);

@@ -11,14 +11,14 @@ import Home from "@present/pages/Home/Home";
 import Scrapscreen from "@present/pages/Scrapscreen/Scrapscreen";
 
 function App() {
-  const { scraps, setScraps } = useScrapStore((state: any) => state);
+  const { setScraps, initFilteredScraps } = useScrapStore((state: any) => state);
 
   useEffect(() => {
     const scrapsLocal = localStorage.getItem("scraps");
     setScraps(JSON.parse(scrapsLocal));
+    initFilteredScraps()
   }, []);
 
-  console.log(scraps)
   return (
     <BrowserRouter>
       <div id="app">

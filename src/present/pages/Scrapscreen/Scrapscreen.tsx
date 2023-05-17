@@ -8,10 +8,14 @@ import { removeDuplicate } from "@src/actions/modules/scrap";
 
 function Scrapscreen() {
   const navigate = useNavigate();
-  const { scraps } = useScrapStore((state: any) => state)
+  const { filteredScraps } = useScrapStore(
+    (state: any) => state
+  );
+
+  console.log(filteredScraps)
 
   //   check No Scrap
-  const noscrapCheck = scraps.length === 0 ? true : false;
+  const noscrapCheck = filteredScraps.length === 0 ? true : false;
   const noScraps = <div>저장된 스크랩이 없습니다.</div>;
 
   const moveHome = () => {
@@ -19,8 +23,8 @@ function Scrapscreen() {
   };
 
   // create Article Component by scraps
-  const articles = removeDuplicate(scraps).map((elem, idx) => {
-    return <Article key={idx} item={elem}  />;
+  const articles = removeDuplicate(filteredScraps).map((elem, idx) => {
+    return <Article key={idx} item={elem} />;
   });
 
   return (
