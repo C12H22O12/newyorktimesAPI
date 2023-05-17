@@ -16,28 +16,30 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 type FilterModalProps = {
-  onClose: any;
-  queryHandler: any;
+  onClose: () => void;
+  queryHandler: (modalQuery:FilterType) => void;
 };
 
 function FilterModal({ onClose, queryHandler }: FilterModalProps) {
+  const [flag, setFlag] = useState<boolean>(true); // 첫 렌더링 판단
   const [targetDate, setTargetDate] = useState(new Date());
   const [inputDate, setInputDate] = useState<string>("날짜를 선택해주세요");
   const [modalQuery, setModalQuery] = useState<FilterType>({
     headLine: "",
-    date: "",
+    date: null,
     country: [],
   });
 
   useEffect(() => {
-    console.log(targetDate, inputDate);
-    if (modalQuery.date === "") {
-      setModalQuery((prev) => {
-        return { ...prev, date: format(targetDate, "yyyyMMdd") };
-      });
-    } else {
-      setInputDate(format(targetDate, "yyyy.MM.dd"));
+    if (flag) {
+      setFlag(false);
+      return;
     }
+
+    setModalQuery((prev) => {
+      return { ...prev, date: targetDate };
+    });
+    setInputDate(format(targetDate, "yyyy.MM.dd"));
   }, [targetDate]);
 
   // datepicker

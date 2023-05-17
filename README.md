@@ -63,9 +63,19 @@ npm run dev
 ### Error Handling
 - [X] 401
 - [X] 429
-- [ ] 404 Page
 - [X] NoData
-- [ ] No Change in useData url
+- [X] No Change in useData url
 - [X] Article Scrap state
-- [ ] No Change on filter when change Page
-- [ ] Scrap Duplicated
+- [X] No Change on filter when change Page
+- [X] Scrap Duplicated
+- [X] Date Filter showing
+- [X] Country Filter showing
+- [X] Apply newest article list on Home
+- [X] Apply new url to getData
+- [X] Show article list after code refactored
+- [X] Home Component occurs too many rendering
+- [X] Page not changed when infinite scroll
+- [X] Navbar changed when reload page
+- [X] Not Apply snaps when unchecked on homepage
+- [X] link added error
+- [X] reset url when infinite scroll

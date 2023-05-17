@@ -1,39 +1,38 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useMemo } from "react";
 
 import Article from "@component/Article/Article";
 import Loading from "@layout/Loading/Loading";
 import ToastContainer from "@layout/ToastContainer/ToastContainer";
 
+import useData from "@src/actions/hooks/useData";
+
 import NoData from "@layout/NoData/NoData";
-import { ArticleType } from "@src/types/Article";
-import { ToastType } from "@src/types/Toast";
+import { useDataTypes } from "@src/types/Article";
+import { useUrlStore } from "@store/useUrlStore";
+import { useToastStore } from "@store/useToastStore";
 
-type HomeProps = {
-  articleList: Array<ArticleType>;
-  toastOn: ToastType;
-  toastCloseHandler: any;
-  moreData: boolean;
-  target: React.MutableRefObject<any>;
-  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>
-};
+function Home() {
+  const { articleList, setInitPage } = useUrlStore((state) => state);
+  const { toast } = useToastStore((state) => state);
 
-function Home({
-  articleList,
-  toastOn,
-  toastCloseHandler,
-  moreData,
-  target,
-  setToastOn
-}: HomeProps) {
-  // create Article Component by articleList
-  const articles = articleList.map((elem, idx) => {
-    return <Article key={idx} item={elem} setToastOn={setToastOn} />;
-  });
+  useEffect(() => {
+    setInitPage();
+  }, []);
+
+  // Article Component
+  const list = useMemo(() => {
+    return articleList.map((elem, idx) => {
+      return <Article key={idx} item={elem} />;
+    });
+  }, [articleList]);
 
   // reloadHandler for Error
   const reloadHandler = () => {
     location.reload();
   };
+
+  // get Article List
+  const { moreData, target }: useDataTypes = useData();
 
   const noDataText = (
     <div>
@@ -48,12 +47,10 @@ function Home({
       {articleList.length === 0 ? <Loading /> : null}
 
       {/* Toast 생성 */}
-      {toastOn.isToast && (
-        <ToastContainer aboutToast={toastOn} closeHandler={toastCloseHandler} />
-      )}
+      {toast.isToast && <ToastContainer />}
 
       {/* Error 발생 시 NoData layout 보여주기 */}
-      {articleList.length !== 0 && toastOn.type === "error" ? (
+      {articleList.length !== 0 && toast.type === "error" ? (
         <NoData
           type={"noData"}
           content={noDataText}
@@ -62,7 +59,12 @@ function Home({
         />
       ) : (
         <>
-          {articles} {moreData ? <div ref={target} /> : null}
+          {list}
+          {moreData && (
+            <div ref={target} className="beforeInfinite">
+              Loading...
+            </div>
+          )}
         </>
       )}
     </div>

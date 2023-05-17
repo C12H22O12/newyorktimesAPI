@@ -1,35 +1,45 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import "./Article.style.css";
 
 import { ArticleType } from "@src/types/Article";
-import { ToastType } from "@src/types/Toast";
-
-import Toast from "@component/Toast/Toast";
 
 import StarBlank from "@assets/icon/star_blank.png";
 import StarFill from "@assets/icon/star_fill.png";
 import { ScrapToast, UnscrapToast } from "@src/constant/toast";
 import { useScrapStore } from "@src/store/useScrapStore";
 import { useLocation } from "react-router-dom";
+import { useToastStore } from "@src/store/useToastStore";
+import { checkArrayIn, removeDuplicate } from "@src/actions/modules/scrap";
 
 type ArticleProps = {
   item: ArticleType;
-  setToastOn: React.Dispatch<React.SetStateAction<ToastType>>;
 };
 
-function Article({ item, setToastOn }: ArticleProps) {
+function Article({ item }: ArticleProps) {
   const location = useLocation().pathname;
+  const { setToast } = useToastStore((state) => state);
   const { scraps, addScraps, subScraps } = useScrapStore((state) => state);
   const [scrap, setScrap] = useState<boolean>(false);
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
     if (location === "/scrapscreen") setScrap(true);
+
+    if (checkArrayIn(scraps, item.uri)) {
+      setScrap(true);
+    } else {
+      setScrap(false);
+    }
   }, [location]);
 
   useEffect(() => {
-    console.log(scrap, scraps)
-    localStorage.setItem("scraps", JSON.stringify(scraps));
-  }, [scraps]);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      localStorage.setItem("scraps", JSON.stringify(removeDuplicate(scraps)));
+    }
+  }, [scrap]);
 
   // Date
   const publicDate = item.pub_date.slice(0, 10);
@@ -48,14 +58,14 @@ function Article({ item, setToastOn }: ArticleProps) {
   // scrapHandler
   const scrapHandler = (e) => {
     e.stopPropagation(); //Stop Event Bubbling
-    setScrap(!scrap);
     if (scrap) {
       subScraps(item);
-      setToastOn({ ...UnscrapToast });
+      setToast({ ...UnscrapToast });
     } else {
       addScraps(item);
-      setToastOn({ ...ScrapToast });
+      setToast({ ...ScrapToast });
     }
+    setScrap(!scrap);
   };
 
   return (

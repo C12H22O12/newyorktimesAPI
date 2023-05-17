@@ -6,18 +6,30 @@ import { ReactComponent as Calendar } from "@assets/icon/calendar_icon.svg";
 import Modal from "@src/present/component/Modal/Modal";
 import FilterModal from "@src/present/layout/FilterModal/FilterModal";
 import { FilterType } from "@src/types/Filter";
+import { useUrlStore } from "@src/store/useUrlStore";
+import { format } from "date-fns";
+import { returnName } from "@action/modules/dummy";
+import { useLocation } from "react-router-dom";
 
-type HeaderProps = {
-  setUrl: any;
-};
-
-function Header({ setUrl }: HeaderProps) {
+function Header() {
+  const location = useLocation().pathname;
+  const { setFilterUrl, setInitPage, setInitArticleList } = useUrlStore(
+    (state) => state
+  );
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
-    date: "",
+    date: null,
     country: [],
   });
+
+  useEffect(() => {
+    setQuery({
+      headLine: "",
+      date: null,
+      country: [],
+    });
+  }, [location]);
 
   useEffect(() => {
     let tmpUrl = "";
@@ -26,24 +38,23 @@ function Header({ setUrl }: HeaderProps) {
       tmpUrl += `&q=${query.headLine}`;
     }
 
-    if (query.date !== "") {
-      tmpUrl += `&begin_date=${query.date}&end_date=${query.date}`;
+    if (query.date !== null) {
+      const tmpDate = format(query.date, "yyyyMMdd");
+      tmpUrl += `&begin_date=${tmpDate}&end_date=${tmpDate}`;
     }
 
     if (query.country.length !== 0) {
-      tmpUrl += `&fq=glocations:(`
+      tmpUrl += `&fq=glocations:(`;
       for (const i of query.country) {
-        tmpUrl += `"${i}",`
+        tmpUrl += `"${i}",`;
       }
 
-      tmpUrl += `)`
+      tmpUrl += `)`;
     }
 
-    console.log(tmpUrl);
-
-    return () => {
-      setUrl(tmpUrl);
-    };
+    setFilterUrl(tmpUrl);
+    setInitPage();
+    setInitArticleList();
   }, [query]);
 
   // modal Handler
@@ -56,17 +67,21 @@ function Header({ setUrl }: HeaderProps) {
   };
 
   // query handler
-  const queryHandler = (modalQuery) => {
+  const queryHandler = (modalQuery: FilterType) => {
     setQuery({ ...modalQuery });
   };
-
-  console.log(query);
 
   // Header Components
   const content = [
     { svg: <Search />, content: query.headLine },
-    { svg: <Calendar />, content: query.date },
-    { svg: null, content: query.country },
+    {
+      svg: <Calendar />,
+      content: query.date !== null ? format(query.date, "yyyy.MM.dd") : "",
+    },
+    {
+      svg: null,
+      content: query.country.length !== 0 ? returnName(query.country) : "",
+    },
   ];
 
   const headerCompos = content.map((elem, idx) => {

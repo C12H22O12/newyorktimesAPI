@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef } from "react";
 
-function useInfinite(onIntersect) {
+function useInfinite(getData) {
   const ref = useRef(null);
 
   const handleIntersect = useCallback(
     ([entry], observer) => {
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
-        onIntersect(entry, observer);
+        getData();
       }
     },
-    [onIntersect]
+    [getData]
   );
 
   useEffect(() => {
