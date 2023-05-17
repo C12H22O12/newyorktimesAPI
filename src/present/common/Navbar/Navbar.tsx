@@ -17,7 +17,9 @@ function Navbar() {
   };
 
   useEffect(() => {
-    setNowPage(location);
+    if (location === "/scrapscreen")  {
+      setNowPage(location);
+    }
   }, [location]);
 
   return (
