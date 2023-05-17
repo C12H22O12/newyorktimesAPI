@@ -50,10 +50,6 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
   },
 
   //   URl
-  setNextPage: () => {
-    set((state) => ({ url: `&page=${state.page}` }));
-  },
-
   setFilterUrl: (plusUrl) => {
     set(() => ({ url: plusUrl }));
   },

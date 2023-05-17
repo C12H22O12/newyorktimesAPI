@@ -12,7 +12,7 @@ import { useUrlStore } from "@store/useUrlStore";
 import { useToastStore } from "@store/useToastStore";
 
 function Home() {
-  const { articleList, setInitPage } = useUrlStore((state) => state);
+  const { url, articleList, setInitPage } = useUrlStore((state) => state);
   const { toast } = useToastStore((state) => state);
 
   useEffect(() => {
@@ -30,6 +30,8 @@ function Home() {
   const reloadHandler = () => {
     location.reload();
   };
+
+  console.log(url)
 
   // get Article List
   const { moreData, target }: useDataTypes = useData();
