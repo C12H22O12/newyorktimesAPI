@@ -14,10 +14,10 @@ import { useScrapStore } from "@src/store/useScrapStore";
 
 function Header() {
   const location = useLocation().pathname;
-  const { setFilterUrl, setInitPage, setInitArticleList } = useUrlStore(
+  const { setFilterUrl, setInitPage, setInitArticleList, } = useUrlStore(
     (state) => state
   );
-  const { filterScraps } = useScrapStore((state) => state);
+  const { filterScraps, initFilteredScraps } = useScrapStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -35,6 +35,7 @@ function Header() {
 
   useEffect(() => {
     if (location === "/scrapscreen") {
+      initFilteredScraps()
       filterScraps(query);
     } else {
       let tmpUrl = "";
