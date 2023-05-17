@@ -63,7 +63,7 @@ function Header() {
   };
 
   // query handler
-  const queryHandler = (modalQuery) => {
+  const queryHandler = (modalQuery:FilterType) => {
     setQuery({ ...modalQuery });
   };
 

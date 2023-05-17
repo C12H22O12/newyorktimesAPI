@@ -75,3 +75,4 @@ npm run dev
 - [X] Home Component occurs too many rendering
 - [X] Page not changed when infinite scroll
 - [X] Navbar changed when reload page
+- [ ] Not Apply snaps when unchecked on homepage

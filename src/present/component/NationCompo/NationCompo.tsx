@@ -4,7 +4,7 @@ import { NationCompoTypes } from "@src/types/Filter";
 
 type NationCompoProps = {
   nation: NationCompoTypes;
-  handler: any;
+  handler: (checked: boolean, item: string) => void;
 };
 
 function NationCompo({ nation, handler }: NationCompoProps) {

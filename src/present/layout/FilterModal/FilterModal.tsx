@@ -16,8 +16,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 type FilterModalProps = {
-  onClose: any;
-  queryHandler: any;
+  onClose: () => void;
+  queryHandler: (modalQuery:FilterType) => void;
 };
 
 function FilterModal({ onClose, queryHandler }: FilterModalProps) {
