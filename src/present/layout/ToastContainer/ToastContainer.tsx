@@ -9,11 +9,11 @@ function ToastContainer() {
   useEffect(() => {
     const animationTimer = setInterval(() => {
       setIsAppear(false);
-    }, 4000);
+    }, 2500);
 
     const apperTimer = setTimeout(() => {
       closeToast();
-    }, 5000);
+    }, 3500);
 
     return () => {
       clearTimeout(animationTimer);
