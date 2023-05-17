@@ -15,8 +15,11 @@ function App() {
 
   useEffect(() => {
     const scrapsLocal = localStorage.getItem("scraps");
-    setScraps(JSON.parse(scrapsLocal));
-    initFilteredScraps()
+
+    if (scrapsLocal !== null) {
+      setScraps(JSON.parse(scrapsLocal));
+      initFilteredScraps()
+    }
   }, []);
 
   return (
