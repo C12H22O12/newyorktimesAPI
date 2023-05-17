@@ -10,10 +10,14 @@ import { useUrlStore } from "@src/store/useUrlStore";
 import { format } from "date-fns";
 import { returnName } from "@action/modules/dummy";
 import { useLocation } from "react-router-dom";
+import { useScrapStore } from "@src/store/useScrapStore";
 
 function Header() {
   const location = useLocation().pathname;
   const { setFilterUrl, setInitPage, setInitArticleList } = useUrlStore(
+    (state) => state
+  );
+  const { filterScraps } = useScrapStore(
     (state) => state
   );
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -32,29 +36,33 @@ function Header() {
   }, [location]);
 
   useEffect(() => {
-    let tmpUrl = "";
+    if (location === "/home") {
+      let tmpUrl = "";
 
-    if (query.headLine !== "") {
-      tmpUrl += `&q=${query.headLine}`;
-    }
-
-    if (query.date !== null) {
-      const tmpDate = format(query.date, "yyyyMMdd");
-      tmpUrl += `&begin_date=${tmpDate}&end_date=${tmpDate}`;
-    }
-
-    if (query.country.length !== 0) {
-      tmpUrl += `&fq=glocations:(`;
-      for (const i of query.country) {
-        tmpUrl += `"${i}",`;
+      if (query.headLine !== "") {
+        tmpUrl += `&q=${query.headLine}`;
       }
 
-      tmpUrl += `)`;
-    }
+      if (query.date !== null) {
+        const tmpDate = format(query.date, "yyyyMMdd");
+        tmpUrl += `&begin_date=${tmpDate}&end_date=${tmpDate}`;
+      }
 
-    setFilterUrl(tmpUrl);
-    setInitPage();
-    setInitArticleList();
+      if (query.country.length !== 0) {
+        tmpUrl += `&fq=glocations:(`;
+        for (const i of query.country) {
+          tmpUrl += `"${i}",`;
+        }
+
+        tmpUrl += `)`;
+      }
+
+      setFilterUrl(tmpUrl);
+      setInitPage();
+      setInitArticleList();
+    } else {
+        filterScraps(query);
+    }
   }, [query]);
 
   // modal Handler
