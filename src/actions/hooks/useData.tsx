@@ -15,7 +15,6 @@ function useData() {
   const getData = useCallback(async () => {
     await getAsync(url).then((res) => {
       if (res.isSuccess) {
-        console.log(url);
         setInfiniteList(res.result.docs);
       } else {
         setMoreDate(false);
@@ -26,9 +25,7 @@ function useData() {
   }, [url]);
 
   // Infinite scroll => observer and get new data
-  const target = useInfinite(async (entry, observer) => {
-    await getData();
-  });
+  const target = useInfinite(getData);
 
   return { moreData, target };
 }

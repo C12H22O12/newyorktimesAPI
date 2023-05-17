@@ -71,6 +71,7 @@ npm run dev
 - [X] Date Filter showing
 - [X] Country Filter showing
 - [ ] Apply newest article list on Home
+- [X] Apply new url to getData
 - [X] Show article list after code refactored
 - [X] Home Component occurs too many rendering
 - [X] Page not changed when infinite scroll
