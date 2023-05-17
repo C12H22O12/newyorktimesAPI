@@ -9,6 +9,7 @@ type urlStoreType = {
 
   //   ArticleList
   setArticleList: (list: Array<ArticleType>) => void;
+  setInitArticleList: () => void;
   setInfiniteList: (list: Array<ArticleType>) => void;
 
   //   page
@@ -16,6 +17,7 @@ type urlStoreType = {
 
   //   URl
   setFilterUrl: (plusUrl: string) => void;
+  setFilterInfinite: (plusUrl: string, list: Array<ArticleType>) => void;
 };
 
 export const useUrlStore = create<urlStoreType>()((set) => ({
@@ -29,11 +31,15 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
     set(() => ({ articleList: [...list] }));
   },
 
+  setInitArticleList: () => {
+    set(() => ({ articleList: [] }));
+  },
+
   setInfiniteList: (list) => {
     set((state) => ({
       articleList: [...state.articleList, ...list],
       page: state.page + 1,
-      url: `&page=${state.page}`
+      url: `&page=${state.page}`,
     }));
   },
 
@@ -49,5 +55,13 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
 
   setFilterUrl: (plusUrl) => {
     set(() => ({ url: plusUrl }));
+  },
+
+  setFilterInfinite: (plusUrl, list) => {
+    set((state) => ({
+      articleList: [...state.articleList, ...list],
+      page: state.page + 1,
+      url: `${plusUrl}&page=${state.page}`,
+    }));
   },
 }));

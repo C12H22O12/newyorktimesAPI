@@ -36,7 +36,7 @@ npm run dev
 <br />
 
 ### Filter
-- [ ] Filter
+- [X] Filter
 - [X] Modal
 - [X] NationCompo
 - [X] HeadlineInput
@@ -70,7 +70,7 @@ npm run dev
 - [X] Scrap Duplicated
 - [X] Date Filter showing
 - [X] Country Filter showing
-- [ ] Apply newest article list on Home
+- [X] Apply newest article list on Home
 - [X] Apply new url to getData
 - [X] Show article list after code refactored
 - [X] Home Component occurs too many rendering

@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 
 function Header() {
   const location = useLocation().pathname;
-  const { setFilterUrl } = useUrlStore((state) => state);
+  const { setFilterUrl, setInitArticleList } = useUrlStore((state) => state);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -51,6 +51,7 @@ function Header() {
     }
 
     setFilterUrl(tmpUrl);
+    setInitArticleList()
   }, [query]);
 
   // modal Handler
