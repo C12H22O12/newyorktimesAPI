@@ -77,3 +77,5 @@ npm run dev
 - [X] Page not changed when infinite scroll
 - [X] Navbar changed when reload page
 - [ ] Not Apply snaps when unchecked on homepage
+- [ ] link added error
+- [ ] reset url when infinite scroll
