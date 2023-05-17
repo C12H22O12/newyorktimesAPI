@@ -12,8 +12,6 @@ function Scrapscreen() {
     (state: any) => state
   );
 
-  console.log(filteredScraps)
-
   //   check No Scrap
   const noscrapCheck = filteredScraps.length === 0 ? true : false;
   const noScraps = <div>저장된 스크랩이 없습니다.</div>;

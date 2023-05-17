@@ -61,7 +61,6 @@ function Header() {
       setInitPage();
       setInitArticleList();
     } else {
-        console.log(query)
         filterScraps(query);
     }
   }, [query]);
