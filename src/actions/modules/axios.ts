@@ -1,4 +1,4 @@
-import { url } from "@src/constant/variable";
+import { url } from "@constant/variable";
 import axios from "axios";
 
 export const getAsync = (additionalUrl: string) => {

@@ -13,7 +13,9 @@ import { useLocation } from "react-router-dom";
 
 function Header() {
   const location = useLocation().pathname;
-  const { setFilterUrl, setInitArticleList } = useUrlStore((state) => state);
+  const { setFilterUrl, setInitPage, setInitArticleList } = useUrlStore(
+    (state) => state
+  );
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [query, setQuery] = useState<FilterType>({
     headLine: "",
@@ -51,7 +53,8 @@ function Header() {
     }
 
     setFilterUrl(tmpUrl);
-    setInitArticleList()
+    setInitPage();
+    setInitArticleList();
   }, [query]);
 
   // modal Handler
@@ -64,7 +67,7 @@ function Header() {
   };
 
   // query handler
-  const queryHandler = (modalQuery:FilterType) => {
+  const queryHandler = (modalQuery: FilterType) => {
     setQuery({ ...modalQuery });
   };
 
@@ -77,10 +80,7 @@ function Header() {
     },
     {
       svg: null,
-      content:
-        query.country.length !== 0
-          ? returnName(query.country)
-          : "",
+      content: query.country.length !== 0 ? returnName(query.country) : "",
     },
   ];
 

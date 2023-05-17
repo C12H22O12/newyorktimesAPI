@@ -1,5 +1,6 @@
 import { ArticleType } from "@src/types/Article";
 import { create } from "zustand";
+import { url } from "@constant/variable";
 
 type urlStoreType = {
   //   states
@@ -58,10 +59,20 @@ export const useUrlStore = create<urlStoreType>()((set) => ({
   },
 
   setFilterInfinite: (plusUrl, list) => {
+    const urlObj = new URL(`${url}${plusUrl}`);
+    const params = new URLSearchParams(urlObj.search);
+
+    params.delete('page');
+    urlObj.search = params.toString();
+
+    const newPlusUrl = urlObj.toString().substring(url.length)
+
+    console.log(newPlusUrl)
+
     set((state) => ({
       articleList: [...state.articleList, ...list],
       page: state.page + 1,
-      url: `${plusUrl}&page=${state.page}`,
+      url: `${newPlusUrl}&page=${state.page}`,
     }));
   },
 }));
