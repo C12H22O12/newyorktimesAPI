@@ -1,4 +1,4 @@
-# merakiplace_codingTest_FE
+# codingTest_FE
 ## 실행 방법
 ```
 npm install
